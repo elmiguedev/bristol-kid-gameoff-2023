@@ -1,0 +1,59 @@
+{
+    "activeFile": "levels.json",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilesets/tileset.tmx": {
+            "expandedGroupLayers": [
+                3
+            ],
+            "scale": 0.1661,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 2004.8163756773024,
+                "y": 466.58639373871165
+            }
+        },
+        "/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilesets/tileset.tmx#tileset": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "levels.json": {
+            "expandedGroupLayers": [
+                3,
+                5
+            ],
+            "scale": 0.2928,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 819.672131147541,
+                "y": 121.24316939890718
+            }
+        },
+        "levels.json#tileset": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilemaps",
+    "last.imagePath": "/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilesets",
+    "lastUsedTilesetExportFilter": "All Files (*)",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 100,
+    "openFiles": [
+        "levels.json"
+    ],
+    "project": "levels.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "levels.json",
+        "/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilesets/tileset.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}
