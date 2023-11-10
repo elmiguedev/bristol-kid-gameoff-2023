@@ -52,7 +52,6 @@ export class LevelScene extends Phaser.Scene {
   // --------------------------
 
   update() {
-    this.kid.update();
     this.checkInput();
   }
 
@@ -63,7 +62,7 @@ export class LevelScene extends Phaser.Scene {
     } else if (this.cursors.left.isDown) {
       this.kid.walk("left");
     } else {
-      this.kid.idle();
+      this.kid.stopMovement();
     }
 
     if (this.cursors.up.isDown) {

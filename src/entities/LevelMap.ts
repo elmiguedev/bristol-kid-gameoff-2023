@@ -28,7 +28,21 @@ export class LevelMap {
     this.tilesLayer = this.map.createLayer(`${this.currentLevel}/tiles_layer`, `tileset`, 0, 0);
     this.solidLayer = this.map.createLayer(`${this.currentLevel}/solid_layer`, `tileset`, 0, 0);
     if (this.solidLayer) {
-      this.solidLayer.setCollisionByProperty({ solid: true });
+      this.solidLayer.forEachTile((tile) => {
+        if (tile.properties.solid) {
+          if (!tile.properties.solid_left && !tile.properties.solid_right && !tile.properties.solid_top && !tile.properties.solid_bottom) {
+            tile.setCollision(true, true, true, true);
+          } else {
+            tile.setCollision(
+              tile.properties.solid_left || false,
+              tile.properties.solid_right || false,
+              tile.properties.solid_top || false,
+              tile.properties.solid_bottom || false
+            );
+          }
+        }
+      })
+
       this.solidLayer.setVisible(false);
     }
   }

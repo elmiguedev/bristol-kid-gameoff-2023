@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { LevelScene } from "./scenes/LevelScene";
 import { BootloaderScene } from "./scenes/BootloaderScene";
+import { GRAVITY } from "./utils/Constants";
 
 export default new Phaser.Game({
   type: Phaser.CANVAS,
@@ -14,7 +15,7 @@ export default new Phaser.Game({
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 1000 },
+      gravity: { y: GRAVITY },
       debug: true
     }
   },
