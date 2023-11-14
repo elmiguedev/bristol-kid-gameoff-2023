@@ -16,7 +16,7 @@ export class LevelMap {
   private tilesLayer: Phaser.Tilemaps.TilemapLayer | null;
   private solidLayer: Phaser.Tilemaps.TilemapLayer | null;
   private objectsLayer: Phaser.Tilemaps.ObjectLayer | null;
-
+  
   constructor(scene: Scene, currentLevel: LevelKey) {
     this.scene = scene;
     this.currentLevel = currentLevel;
@@ -58,5 +58,10 @@ export class LevelMap {
     }
   }
 
+  public getEnemiesPositions(classname:string) {
+    if (this.objectsLayer) {
+      return this.objectsLayer.objects.filter((object: any) => object.type === classname);
+    }
+  }
 
 }

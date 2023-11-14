@@ -30,6 +30,86 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
     "sourceSize": { "w": 100, "h": 150 },
     "duration": 100
+   },
+   "4": {
+    "frame": { "x": 400, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "5": {
+    "frame": { "x": 500, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "6": {
+    "frame": { "x": 600, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "7": {
+    "frame": { "x": 700, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "8": {
+    "frame": { "x": 800, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "9": {
+    "frame": { "x": 900, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "10": {
+    "frame": { "x": 1000, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "11": {
+    "frame": { "x": 1100, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "12": {
+    "frame": { "x": 1200, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
+   },
+   "13": {
+    "frame": { "x": 1300, "y": 0, "w": 100, "h": 150 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 150 },
+    "sourceSize": { "w": 100, "h": 150 },
+    "duration": 100
    }
  },
  "meta": {
@@ -37,10 +117,19 @@
   "version": "1.2.40-x64",
   "image": "kid.png",
   "format": "RGBA8888",
-  "size": { "w": 400, "h": 150 },
+  "size": { "w": 1400, "h": 150 },
   "scale": "1",
   "frameTags": [
-   { "name": "walk", "from": 0, "to": 3, "direction": "forward" }
+   { "name": "idle", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "walk", "from": 1, "to": 4, "direction": "forward" },
+   { "name": "poo", "from": 5, "to": 8, "direction": "forward" },
+   { "name": "jump", "from": 9, "to": 11, "direction": "forward" },
+   { "name": "falling", "from": 12, "to": 13, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "body", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
   ]
  }
 }

@@ -1,5 +1,6 @@
 import { Kid } from "../entities/Kid";
 import { LevelKey, LevelMap } from "../entities/LevelMap";
+import { EnemySoldier } from "../entities/enemies/Soldier";
 
 export class LevelScene extends Phaser.Scene {
 
@@ -7,6 +8,7 @@ export class LevelScene extends Phaser.Scene {
   private levelMap!: LevelMap;
   private kid!: Kid;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  private enemies!:Phaser.Physics.Arcade.Group;
 
   constructor() {
     super("LevelScene");
@@ -23,6 +25,7 @@ export class LevelScene extends Phaser.Scene {
     this.createMap();
     this.createKid();
     this.createCursors();
+    this.createEnemies();
     this.createCollisions();
   }
 
@@ -39,6 +42,19 @@ export class LevelScene extends Phaser.Scene {
     }
   }
 
+  createEnemies() {
+    this.enemies = this.physics.add.group();
+    const positions = this.levelMap.getEnemiesPositions("soldier");
+    if (positions) {
+      positions.forEach((position) => {
+        const enemy_soldier = new EnemySoldier(this,position.x!, position.y!);
+        this.levelMap.addCollider(enemy_soldier);
+        this.enemies.add(enemy_soldier);
+        enemy_soldier.setVelocityX(-100);
+      })
+    }
+  }
+
   createCursors() {
     this.cursors = this.input.keyboard!.createCursorKeys();
   }
@@ -46,6 +62,10 @@ export class LevelScene extends Phaser.Scene {
 
   createCollisions() {
     this.levelMap.addCollider(this.kid);
+    this.physics.add.collider(this.kid.pooBullets, this.enemies, (pooBullet, enemy) => {
+      enemy.destroy();
+      pooBullet.destroy();
+    });
   }
 
   // behavior methods
@@ -53,6 +73,7 @@ export class LevelScene extends Phaser.Scene {
 
   update() {
     this.checkInput();
+    this.kid.update();
   }
 
   checkInput() {
@@ -69,8 +90,8 @@ export class LevelScene extends Phaser.Scene {
       this.kid.jump();
     }
 
-    if (this.cursors.shift.isDown) {
-      this.scene.restart({ level: "level_2" });
+    if (this.cursors.space.isDown) {
+    this.kid.poo();
     }
 
   }
