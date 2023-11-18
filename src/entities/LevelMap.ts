@@ -13,20 +13,50 @@ export class LevelMap {
 
   private map!: Phaser.Tilemaps.Tilemap;
   private tileset: Phaser.Tilemaps.Tileset | null;
-  private tilesLayer: Phaser.Tilemaps.TilemapLayer | null;
+  private topLayer: Phaser.Tilemaps.TilemapLayer | null;
+  private backgroundLayer: Phaser.Tilemaps.TilemapLayer | null;
   private solidLayer: Phaser.Tilemaps.TilemapLayer | null;
   private objectsLayer: Phaser.Tilemaps.ObjectLayer | null;
-  
+
   constructor(scene: Scene, currentLevel: LevelKey) {
     this.scene = scene;
     this.currentLevel = currentLevel;
+    this.createMapLayers();
+    this.configureSolidLayer();
+  }
 
+  public getKidPosition(): Phaser.Types.Math.Vector2Like {
+    if (this.objectsLayer) {
+      const position = this.objectsLayer.objects.find((object: any) => object.name === "kid");
+      return {
+        x: position?.x || 100,
+        y: position?.y || 100
+      };
+    }
+    return {
+      x: 100,
+      y: 100
+    }
+  }
+
+  public getObjects() {
+    return this.objectsLayer.objects;
+  }
+
+  public getSolidLayer() {
+    return this.solidLayer;
+  }
+
+  private createMapLayers() {
     this.map = this.scene.make.tilemap({ key: "levels" });
     this.tileset = this.map.addTilesetImage("tileset", "tileset")!;
-
     this.objectsLayer = this.map.getObjectLayer(`${this.currentLevel}/objects_layer`);
-    this.tilesLayer = this.map.createLayer(`${this.currentLevel}/tiles_layer`, `tileset`, 0, 0);
+    this.backgroundLayer = this.map.createLayer(`${this.currentLevel}/background_layer`, `tileset`, 0, 0);
+    this.topLayer = this.map.createLayer(`${this.currentLevel}/top_layer`, `tileset`, 0, 0);
     this.solidLayer = this.map.createLayer(`${this.currentLevel}/solid_layer`, `tileset`, 0, 0);
+  }
+
+  private configureSolidLayer() {
     if (this.solidLayer) {
       this.solidLayer.forEachTile((tile) => {
         if (tile.properties.solid) {
@@ -42,25 +72,7 @@ export class LevelMap {
           }
         }
       })
-
       this.solidLayer.setVisible(false);
-    }
-  }
-
-  public addCollider(object: GameObjects.GameObject) {
-    if (this.solidLayer)
-      this.scene.physics.add.collider(this.solidLayer, object);
-  }
-
-  public getKidPosition() {
-    if (this.objectsLayer) {
-      return this.objectsLayer.objects.find((object: any) => object.name === "kid")!;
-    }
-  }
-
-  public getEnemiesPositions(classname:string) {
-    if (this.objectsLayer) {
-      return this.objectsLayer.objects.filter((object: any) => object.type === classname);
     }
   }
 

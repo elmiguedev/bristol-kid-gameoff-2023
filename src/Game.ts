@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { LevelScene } from "./scenes/LevelScene";
+import { LevelScene } from "./scenes/LevelScene/LevelScene";
 import { BootloaderScene } from "./scenes/BootloaderScene";
 import { GRAVITY } from "./utils/Constants";
 
