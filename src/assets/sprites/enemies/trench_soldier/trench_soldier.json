@@ -1,0 +1,104 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "1": {
+    "frame": { "x": 180, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "2": {
+    "frame": { "x": 360, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "3": {
+    "frame": { "x": 540, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "4": {
+    "frame": { "x": 720, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "5": {
+    "frame": { "x": 900, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "6": {
+    "frame": { "x": 1080, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "7": {
+    "frame": { "x": 1260, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "8": {
+    "frame": { "x": 1440, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   },
+   "9": {
+    "frame": { "x": 1620, "y": 0, "w": 180, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 180, "h": 128 },
+    "sourceSize": { "w": 180, "h": 128 },
+    "duration": 83
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.40-x64",
+  "image": "trench_soldier.png",
+  "format": "RGBA8888",
+  "size": { "w": 1800, "h": 128 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "idle", "from": 0, "to": 0, "direction": "forward" },
+   { "name": "bomb", "from": 1, "to": 4, "direction": "forward" },
+   { "name": "fire", "from": 5, "to": 9, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Trench", "opacity": 255, "blendMode": "normal" },
+   { "name": "Soldier", "opacity": 255, "blendMode": "normal" },
+   { "name": "Gun", "opacity": 255, "blendMode": "normal" },
+   { "name": "Shadow", "opacity": 116, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
