@@ -45,6 +45,7 @@ export class LevelScene extends Phaser.Scene {
   configureCamera() {
     this.cameras.main.setBounds(0, 0, 6400, 1280);
     this.cameras.main.startFollow(this.entityManager.getKid(), true);
+    // this.cameras.main.setZoom(2);
     this.cameras.main.setBackgroundColor(0xd77bba)
   }
 

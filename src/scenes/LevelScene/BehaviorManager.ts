@@ -38,7 +38,8 @@ export class BehaviorManager {
     }
 
     if (this.cursorKeys.space.isDown) {
-      this.entityManager.getKid().poo();
+      // this.entityManager.getKid().poo();
+      this.entityManager.getKid().punch();
     }
   }
 
