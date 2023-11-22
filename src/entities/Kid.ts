@@ -15,7 +15,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
     this.anims.createFromAseprite("kid");
     this.setOrigin(0.5, 1);
-    this.setScale(1.5)
+    // this.setScale(1.5)
 
     this.pooBullets = this.scene.physics.add.group({
       classType: PooBullet,
@@ -23,6 +23,16 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
       allowGravity: false
     });
   }
+
+  // update method
+  // --------------
+
+  public update() {
+    this.playAnimation();
+  }
+
+  // actions 
+  // --------------
 
   public walk(direction: 'left' | 'right') {
     switch (direction) {
@@ -86,49 +96,82 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.setVelocityX(0);
   }
 
-  public update() {
-    if (this.body) {
-      if (this.pooing) {
-        this.anims.play({
-          key: "poo",
-          frameRate: 20
-        }, true);
-        return
-      }
-      if (this.punching) {
-        this.anims.play({
-          key: "punch",
-          frameRate: 20
-        }, true);
-        return
-      }
-      if (!this.body.blocked.down) {
-        if (this.body.velocity.y > 0) {
-          this.anims.play({
-            key: "fall",
-            frameRate: 30
-          }, true);
-        } else {
-          this.anims.play({
-            key: "jump",
-            frameRate: 20,
-            repeat: 0
-          }, true);
-        }
-      } else {
-        if (this.body.velocity.x !== 0) {
-          this.anims.play({
-            key: "walk",
-            frameRate: 20
-          }, true);
-        } else {
-          this.anims.play("idle", true);
-        }
-      }
+  // animations 
+  // --------------
 
+  private playPooAnimation() {
+    this.anims.play({
+      key: "poo",
+      frameRate: 20
+    }, true);
+  }
+
+  private playPunchAnimation() {
+    this.anims.play({
+      key: "punch",
+      frameRate: 20
+    }, true);
+  }
+
+  private playJumpAnimation() {
+    this.anims.play({
+      key: "jump",
+      frameRate: 20
+    }, true);
+  }
+
+  private playFallAnimation() {
+    this.anims.play({
+      key: "fall",
+      frameRate: 30
+    }, true);
+  }
+
+  private playWalkAnimation() {
+    this.anims.play({
+      key: "walk",
+      frameRate: 20
+    }, true);
+  }
+
+  private playIdleAnimation() {
+    this.anims.play("idle", true);
+  }
+
+  private playAnimation() {
+    if (!this.body) return;
+
+    if (this.pooing) {
+      this.playPooAnimation();
+      return;
     }
 
+    if (this.punching) {
+      this.playPunchAnimation();
+      return;
+    }
+
+    if (this.body.blocked.down) {
+      if (this.body.velocity.x !== 0) {
+        this.playWalkAnimation();
+        return;
+      } else {
+        this.playIdleAnimation();
+        return;
+      }
+    } else {
+      if (this.body.velocity.y < 0) {
+        this.playJumpAnimation();
+        return;
+      } else {
+        this.playFallAnimation();
+        return;
+      }
+    }
   }
+
+
+
 
 
 }
