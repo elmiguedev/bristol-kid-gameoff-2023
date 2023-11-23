@@ -1,6 +1,7 @@
 import { LevelMap } from "~/src/entities/LevelMap";
 import { LevelScene } from "./LevelScene";
 import { EntityManager } from "./EntityManager";
+import { Enemy } from "../../entities/enemies/Enemy";
 
 export class BehaviorManager {
   private scene: LevelScene;
@@ -38,8 +39,8 @@ export class BehaviorManager {
     }
 
     if (this.cursorKeys.space.isDown) {
-      // this.entityManager.getKid().poo();
-      this.entityManager.getKid().punch();
+      this.entityManager.getKid().poo();
+      //this.entityManager.getKid().punch();
     }
   }
 
@@ -57,6 +58,31 @@ export class BehaviorManager {
     this.scene.physics.collide(this.entityManager.getBullets(), this.map.getSolidLayer(), (bullet, layer) => {
       bullet.destroy();
     })
+
+    // 3. collisions between bullets and entities
+    this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getBullets(), (kid, bullet) => {
+      bullet.destroy();
+      this.entityManager.getKid().takeDamage(1);
+      this.scene.cameras.main.shake(100, 0.01);
+      if (this.entityManager.getKid().isDead()) {
+        this.scene.scene.start("GameOverScene");
+      }
+    })
+
+    this.scene.physics.overlap(this.entityManager.getKid().pooBullets, this.entityManager.getEnemies(), (poo, enemy: Enemy) => {
+      poo.destroy();
+      enemy.hurt();
+      if (enemy.isDead()) {
+        enemy.destroy();
+      }
+      // this.entityManager.getKid().takeDamage(1);
+      // this.scene.cameras.main.shake(100, 0.01);
+      // if (this.entityManager.getKid().isDead()) {
+      //   this.scene.scene.start("GameOverScene");
+      // }
+    })
+
+
 
   }
 

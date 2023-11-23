@@ -407,6 +407,11 @@
    { "name": "fart_jump", "from": 31, "to": 33, "direction": "forward" },
    { "name": "poo", "from": 35, "to": 40, "direction": "forward" },
    { "name": "punch", "from": 42, "to": 47, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "kid", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
   ]
  }
 }

@@ -5,6 +5,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
 
   private pooing: boolean = false;
   private punching: boolean = false;
+  private life: number = 10;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
 
@@ -15,7 +16,9 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
     this.anims.createFromAseprite("kid");
     this.setOrigin(0.5, 1);
-    // this.setScale(1.5)
+
+    this.body.setSize(64, 110)
+    this.body.setOffset(32, 62);
 
     this.pooBullets = this.scene.physics.add.group({
       classType: PooBullet,
@@ -90,6 +93,14 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
         this.punching = false;
       }
     })
+  }
+
+  public takeDamage(amount?: number) {
+    this.life -= amount || 1;
+  }
+
+  public isDead() {
+    return this.life <= 0;
   }
 
   public stopMovement() {

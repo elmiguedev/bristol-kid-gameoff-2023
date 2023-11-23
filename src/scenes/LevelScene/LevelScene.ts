@@ -1,7 +1,4 @@
-import { Kid } from "../../entities/Kid";
 import { LevelKey, LevelMap } from "../../entities/LevelMap";
-import { EnemySoldier } from "../../entities/enemies/Soldier";
-import Bullet from "../../entities/generic/Bullet";
 import { BehaviorManager } from "./BehaviorManager";
 import { EntityManager } from "./EntityManager";
 
@@ -34,7 +31,6 @@ export class LevelScene extends Phaser.Scene {
     this.entityManager = new EntityManager(this, this.levelMap);
     this.entityManager.createKid()
     this.entityManager.createEnemies();
-    this.entityManager.createEnemies();
   }
 
   createBehaviors() {
@@ -45,7 +41,6 @@ export class LevelScene extends Phaser.Scene {
   configureCamera() {
     this.cameras.main.setBounds(0, 0, 6400, 1280);
     this.cameras.main.startFollow(this.entityManager.getKid(), true);
-    // this.cameras.main.setZoom(2);
     this.cameras.main.setBackgroundColor(0xd77bba)
   }
 

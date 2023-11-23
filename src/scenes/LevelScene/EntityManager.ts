@@ -1,6 +1,7 @@
 import { Kid } from "../../entities/Kid";
 import { LevelMap } from "../../entities/LevelMap";
-import { EnemySoldier } from "../../entities/enemies/Soldier";
+import { Soldier } from "../../entities/enemies/Soldier";
+import { Tank } from "../../entities/enemies/Tank";
 import Bullet from "../../entities/generic/Bullet";
 import { LevelScene } from "./LevelScene";
 
@@ -38,7 +39,7 @@ export class EntityManager {
       allowGravity: false
     })
     this.enemies = this.scene.physics.add.group({
-      runChildUpdate: true
+      runChildUpdate: true,
     });
     this.map.getObjects().forEach((object) => {
       this.createEnemy(object);
@@ -60,10 +61,19 @@ export class EntityManager {
   private createEnemy(object: Phaser.Types.Tilemaps.TiledObject) {
     switch (object.type) {
       case "enemy_soldier":
-        const enemySoldier = new EnemySoldier(this.scene, object.x, object.y);
+        const enemySoldier = new Soldier(this.scene, object.x, object.y);
+        this.enemies.add(enemySoldier);
         enemySoldier.setBullets(this.bullets);
         enemySoldier.setTarget(this.kid);
-        this.enemies.add(enemySoldier);
+        const walkRadius = object.properties.find(p => p.name === "walk_radius").value || 64;
+        console.log(walkRadius)
+        enemySoldier.patrol(walkRadius);
+        break;
+      case "enemy_tank":
+        const tank = new Tank(this.scene, object.x, object.y);
+        this.enemies.add(tank);
+        tank.setTarget(this.kid);
+        tank.patrol();
         break;
     }
   }
