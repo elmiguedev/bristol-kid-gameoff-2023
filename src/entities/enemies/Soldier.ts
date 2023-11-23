@@ -15,8 +15,6 @@ export class Soldier extends Enemy {
     this.patrolSpeed = this.DEFAULT_SPEED;
     this.isFiring = false;
     this.life = 3;
-    this.setOrigin(0.5, 1);
-
   }
 
   public update() {

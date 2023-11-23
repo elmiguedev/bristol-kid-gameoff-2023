@@ -70,7 +70,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.pooing = true;
     const poo = this.pooBullets.getFirstDead(true);
     poo.setPosition(this.x, this.y - 32);
-    poo.setVelocityX(POO_VELOCITY * (this.flipX ? -1 : 1));
+    poo.setVelocityX(POO_VELOCITY * (this.flipX ? 1 : -1));
 
     if (!this.body?.blocked.down) {
       poo.setVelocityY(1000);
