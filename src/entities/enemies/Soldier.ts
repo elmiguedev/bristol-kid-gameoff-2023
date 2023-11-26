@@ -22,10 +22,6 @@ export class Soldier extends Enemy {
     this.checkFire();
   }
 
-  public setBullets(bullets: Phaser.Physics.Arcade.Group) {
-    this.bullets = bullets;
-  }
-
   private checkFire() {
     if (!this.isFiring && this.isTargetVisible()) {
       this.fire();

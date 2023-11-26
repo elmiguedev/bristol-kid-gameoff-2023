@@ -8,6 +8,9 @@ import SoldierJson from "../assets/sprites/enemies/soldier/soldier.json";
 import BulletPng from "../assets/sprites/generic/bullet.png";
 import TankPng from "../assets/sprites/enemies/tank/tank.png";
 import TankJson from "../assets/sprites/enemies/tank/tank.json";
+import CanonPng from "../assets/sprites/enemies/tank/canon/canon.png";
+import BlobBulletPng from "../assets/sprites/generic/blob_bullet/blob_bullet.png";
+import BlobBulletJson from "../assets/sprites/generic/blob_bullet/blob_bullet.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -18,6 +21,8 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("kid", KidPng, KidJson);
     this.load.aseprite("enemy_soldier", SoldierPng, SoldierJson);
     this.load.aseprite("enemy_tank", TankPng, TankJson);
+    this.load.aseprite("blob_bullet", BlobBulletPng, BlobBulletJson);
+    this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);
     this.load.image("poo_bullet", PooBulletPng);

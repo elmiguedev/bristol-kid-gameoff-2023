@@ -19,11 +19,11 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.scene.physics.add.existing(this);
     this.scene.add.existing(this);
     this.anims.createFromAseprite(texture);
+    this.targetRadius = ENEMY_DEFAULT_TARGET_RADIUS;
   }
 
-  public setTarget(target: Kid, targetRadius: number = ENEMY_DEFAULT_TARGET_RADIUS) {
+  public setTarget(target: Kid) {
     this.target = target;
-    this.targetRadius = targetRadius;
   }
 
   public hurt(amount?: number) {
@@ -75,5 +75,8 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
     this.setVelocityX(direction === 'left' ? -this.patrolSpeed : this.patrolSpeed);
   }
 
+  public setBullets(bullets: Phaser.Physics.Arcade.Group) {
+    this.bullets = bullets;
+  }
 
 }

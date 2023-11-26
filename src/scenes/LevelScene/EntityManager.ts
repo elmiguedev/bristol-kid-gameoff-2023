@@ -72,6 +72,7 @@ export class EntityManager {
       case "enemy_tank":
         const tank = new Tank(this.scene, object.x, object.y);
         this.enemies.add(tank);
+        tank.setBullets(this.bullets);
         tank.setTarget(this.kid);
         tank.patrol();
         break;
