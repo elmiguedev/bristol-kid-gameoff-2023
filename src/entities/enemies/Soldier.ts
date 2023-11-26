@@ -1,5 +1,6 @@
 import { Scene } from "phaser";
 import { Enemy } from "./Enemy";
+import { BlobBullet } from "../generic/BlobBullet";
 
 export class Soldier extends Enemy {
   private PATROL_RADIUS = 128;
@@ -47,11 +48,15 @@ export class Soldier extends Enemy {
   }
 
   private createBullet() {
-    const bullet = this.bullets.getFirstDead(true, this.x, this.y - 64);
-    if (bullet) {
-      const bulletVelocity = this.body.velocity.x > 0 ? this.FIRE_SPEED : -this.FIRE_SPEED;
-      bullet.setVelocityX(bulletVelocity);
-    }
+    const bulletOffsetDistance = 32;
+    const bulletOffset = this.body.velocity.x > 0 ? bulletOffsetDistance : -bulletOffsetDistance;
+    const bulletX = this.x + bulletOffset;
+    const bulletY = this.y - 74;
+    const bullet = new BlobBullet(this.scene, bulletX, bulletY);
+    bullet.setScale(0.6);
+    this.bullets.add(bullet);
+    const bulletVelocity = this.body.velocity.x > 0 ? 700 : -700;
+    bullet.setVelocityX(bulletVelocity);
   }
 
   protected move(direction: 'left' | 'right') {

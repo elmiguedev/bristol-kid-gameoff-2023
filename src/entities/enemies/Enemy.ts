@@ -54,7 +54,9 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   public update() {
-    this.checkPatrol();
+    if (this.active) {
+      this.checkPatrol();
+    }
   }
 
   public patrol(radius?: number) {
@@ -71,6 +73,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   protected move(direction: 'left' | 'right') {
+    if (!this.active) return;
     this.setFlipX(direction === 'left' ? false : true);
     this.setVelocityX(direction === 'left' ? -this.patrolSpeed : this.patrolSpeed);
   }

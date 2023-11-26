@@ -1,5 +1,5 @@
 import { KID_JUMP_VELOCITY, KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
-import { PooBullet } from "./PooBullet";
+import { PooBullet } from "./generic/PooBullet";
 
 export class Kid extends Phaser.Physics.Arcade.Sprite {
 
@@ -69,7 +69,8 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
 
     this.pooing = true;
     const poo = this.pooBullets.getFirstDead(true);
-    poo.setPosition(this.x, this.y - 32);
+    const pooOffsetX = this.flipX ? 32 : -32;
+    poo.setPosition(this.x + pooOffsetX, this.y - 32);
     poo.setVelocityX(POO_VELOCITY * (this.flipX ? 1 : -1));
 
     if (!this.body?.blocked.down) {

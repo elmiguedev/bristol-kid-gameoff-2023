@@ -2,7 +2,7 @@ import { Kid } from "../../entities/Kid";
 import { LevelMap } from "../../entities/LevelMap";
 import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
-import Bullet from "../../entities/generic/Bullet";
+import { Bullet } from "../../entities/generic/Bullet";
 import { LevelScene } from "./LevelScene";
 
 export class EntityManager {
