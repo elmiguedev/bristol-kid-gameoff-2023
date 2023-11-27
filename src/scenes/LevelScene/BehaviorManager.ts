@@ -2,18 +2,22 @@ import { LevelMap } from "~/src/entities/LevelMap";
 import { LevelScene } from "./LevelScene";
 import { EntityManager } from "./EntityManager";
 import { Enemy } from "../../entities/enemies/Enemy";
+import { LevelHud } from "./LevelHud";
+import { Food } from "../../entities/generic/Food";
 
 export class BehaviorManager {
   private scene: LevelScene;
   private map: LevelMap;
   private entityManager: EntityManager;
+  private hud: LevelHud;
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
 
 
-  constructor(scene: LevelScene, map: LevelMap, entityManager: EntityManager) {
+  constructor(scene: LevelScene, map: LevelMap, entityManager: EntityManager, hud: LevelHud) {
     this.scene = scene;
     this.map = map;
     this.entityManager = entityManager;
+    this.hud = hud;
   }
 
   public update() {
@@ -29,7 +33,8 @@ export class BehaviorManager {
     if (this.cursorKeys.right.isDown) {
       this.entityManager.getKid().walk("right");
     } else if (this.cursorKeys.left.isDown) {
-      this.entityManager.getKid().walk("left");
+      if (!this.entityManager.getKid().isPooing())
+        this.entityManager.getKid().walk("left");
     } else {
       this.entityManager.getKid().stopMovement();
     }
@@ -43,8 +48,10 @@ export class BehaviorManager {
     }
 
     if (this.cursorKeys.space.isDown) {
-      this.entityManager.getKid().poo();
-      //this.entityManager.getKid().punch();
+      if (this.entityManager.getKid().canPoo()) {
+        this.hud.decreasePooLevel();
+        this.entityManager.getKid().poo();
+      }
     }
   }
 
@@ -90,6 +97,15 @@ export class BehaviorManager {
       //   this.scene.scene.start("GameOverScene");
       // }
     })
+
+    // 4. collisions between kid and food
+    this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getFood(), (kid, food: Food) => {
+      const foodValue = food.getFoodValue();
+      food.destroy();
+      this.entityManager.getKid().increasePooLevel(foodValue);
+      this.hud.increasePooLevel(foodValue);
+      // Add your code here to handle the collision between kid and food
+    });
 
 
 

@@ -3,6 +3,7 @@ import { LevelScene } from "./scenes/LevelScene/LevelScene";
 import { BootloaderScene } from "./scenes/BootloaderScene";
 import { GRAVITY } from "./utils/Constants";
 import { GameOverScene } from "./scenes/GameOverScene";
+import { LevelHud } from "./scenes/LevelScene/LevelHud";
 
 export default new Phaser.Game({
   type: Phaser.CANVAS,
@@ -20,10 +21,14 @@ export default new Phaser.Game({
       debug: false
     }
   },
+  render: {
+    pixelArt: true
+  },
   scene: [
     BootloaderScene,
     LevelScene,
-    GameOverScene
+    GameOverScene,
+    LevelHud
 
   ]
 })

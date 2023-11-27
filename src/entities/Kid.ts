@@ -1,4 +1,4 @@
-import { KID_JUMP_VELOCITY, KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
+import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_POO_LEVEL, POO_TIME, POO_VELOCITY } from "../utils/Constants";
 import { PooBullet } from "./generic/PooBullet";
 
 export class Kid extends Phaser.Physics.Arcade.Sprite {
@@ -7,6 +7,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   private punching: boolean = false;
   private life: number = 10;
   private isStepDownState: boolean = false;
+  private pooLevel: number = MAX_POO_LEVEL;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
 
@@ -65,11 +66,8 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   }
 
   public poo() {
-    if (this.pooing) {
-      return;
-    }
-
     this.pooing = true;
+    this.decreasePooLevel();
     const poo = this.pooBullets.getFirstDead(true);
     const pooOffsetX = this.flipX ? 32 : -32;
     poo.setPosition(this.x + pooOffsetX, this.y - 32);
@@ -82,6 +80,14 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.scene.time.delayedCall(POO_TIME, () => {
       this.pooing = false;
     })
+  }
+
+  public canPoo() {
+    return !this.pooing && !this.punching && !this.isStepDownState && this.pooLevel > 0;
+  }
+
+  public isPooing() {
+    return this.pooing;
   }
 
   public punch() {
@@ -123,6 +129,25 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   public isStepDown() {
     return this.isStepDownState;
   }
+
+  public getPooLevel() {
+    return this.pooLevel;
+  }
+
+  public increasePooLevel(value: number = 1) {
+    this.pooLevel += value;
+    if (this.pooLevel >= MAX_POO_LEVEL) {
+      this.pooLevel = MAX_POO_LEVEL;
+    }
+  }
+
+  public decreasePooLevel(value: number = 1) {
+    this.pooLevel -= value;
+    if (this.pooLevel <= 0) {
+      this.pooLevel = 0;
+    }
+  }
+
 
 
   // animations 

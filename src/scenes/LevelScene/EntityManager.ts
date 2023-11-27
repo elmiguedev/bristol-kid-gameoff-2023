@@ -4,6 +4,7 @@ import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
 import { Bullet } from "../../entities/generic/Bullet";
 import { Cloud } from "../../entities/generic/Cloud";
+import { Food } from "../../entities/generic/Food";
 import { Tree } from "../../entities/generic/Tree";
 import { LevelScene } from "./LevelScene";
 
@@ -16,6 +17,7 @@ export class EntityManager {
   private enemies!: Phaser.Physics.Arcade.Group;
   private bullets!: Phaser.Physics.Arcade.Group;
   private clouds!: Phaser.Physics.Arcade.Group;
+  private food!: Phaser.Physics.Arcade.Group;
 
   constructor(scene: LevelScene, map: LevelMap) {
     this.scene = scene;
@@ -35,7 +37,7 @@ export class EntityManager {
     );
   }
 
-  public createEnemies() {
+  public createObjects() {
     this.bullets = this.scene.physics.add.group({
       maxSize: 100,
       classType: Bullet,
@@ -44,11 +46,18 @@ export class EntityManager {
     this.enemies = this.scene.physics.add.group({
       runChildUpdate: true,
     });
+    this.food = this.scene.physics.add.group({
+      classType: Food,
+      allowGravity: false
+    })
     this.map.getObjects().forEach((object) => {
       this.createEnemy(object);
-      this.createObjects(object);
+      this.createObject(object);
+      this.createFood(object);
     });
   }
+
+
 
   public getKid() {
     return this.kid;
@@ -60,6 +69,10 @@ export class EntityManager {
 
   public getBullets() {
     return this.bullets;
+  }
+
+  public getFood() {
+    return this.food;
   }
 
   private createEnemy(object: Phaser.Types.Tilemaps.TiledObject) {
@@ -83,10 +96,20 @@ export class EntityManager {
     }
   }
 
-  private createObjects(object: Phaser.Types.Tilemaps.TiledObject) {
+  private createObject(object: Phaser.Types.Tilemaps.TiledObject) {
     switch (object.type) {
       case "tree":
         const tree = new Tree(this.scene, object.x, object.y);
+        break;
+    }
+  }
+
+  private createFood(object: Phaser.Types.Tilemaps.TiledObject) {
+    switch (object.type) {
+      case "food":
+        const foodType = this.map.getTileObject(object.gid)["foodType"]
+        const food = new Food(this.scene, object.x, object.y, foodType);
+        this.food.add(food);
         break;
     }
   }

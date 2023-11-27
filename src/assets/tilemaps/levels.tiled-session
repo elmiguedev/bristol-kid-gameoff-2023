@@ -46,7 +46,7 @@
         "levels.json"
     ],
     "project": "levels.tiled-project",
-    "property.type": "int",
+    "property.type": "string",
     "recentFiles": [
         "levels.json",
         "C:/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilesets/tileset.tmx"

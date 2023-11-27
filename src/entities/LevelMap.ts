@@ -44,6 +44,10 @@ export class LevelMap {
     return this.objectsLayer.objects;
   }
 
+  public getTileObject(id: number) {
+    return this.tileset.getTileProperties(id);
+  }
+
   public getSolidLayer() {
     return this.solidLayer;
   }

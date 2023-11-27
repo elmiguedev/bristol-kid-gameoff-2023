@@ -257,7 +257,7 @@
                          "type":"kid",
                          "visible":true,
                          "width":0,
-                         "x":1441.55688027819,
+                         "x":265.55688027819,
                          "y":1132.86934923
                         }, 
                         {
@@ -343,6 +343,42 @@
                          "width":0,
                          "x":3490.90909090909,
                          "y":1151.51515151515
+                        }, 
+                        {
+                         "gid":252,
+                         "height":64,
+                         "id":14,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":1092,
+                         "y":960
+                        }, 
+                        {
+                         "gid":253,
+                         "height":64,
+                         "id":15,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":2688,
+                         "y":964
+                        }, 
+                        {
+                         "gid":254,
+                         "height":64,
+                         "id":16,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":3260,
+                         "y":972
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -358,7 +394,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":14,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
@@ -513,6 +549,33 @@
                          "name":"solid_right",
                          "type":"bool",
                          "value":true
+                        }]
+                }, 
+                {
+                 "id":251,
+                 "properties":[
+                        {
+                         "name":"foodType",
+                         "type":"string",
+                         "value":"apple"
+                        }]
+                }, 
+                {
+                 "id":252,
+                 "properties":[
+                        {
+                         "name":"foodType",
+                         "type":"string",
+                         "value":"burger"
+                        }]
+                }, 
+                {
+                 "id":253,
+                 "properties":[
+                        {
+                         "name":"foodType",
+                         "type":"string",
+                         "value":"apio"
                         }]
                 }],
          "tilewidth":64

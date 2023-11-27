@@ -16,6 +16,10 @@ import TreePng from "../assets/sprites/generic/tree/tree.png";
 import TreeJson from "../assets/sprites/generic/tree/tree.json";
 import CloudPng from "../assets/sprites/generic/cloud/cloud.png";
 import CloudJson from "../assets/sprites/generic/cloud/cloud.json";
+import PooLevelPng from "../assets/sprites/hud/poo_level/poo_level.png";
+import PooLevelJson from "../assets/sprites/hud/poo_level/poo_level.json";
+import FoodPng from "../assets/sprites/generic/food/food.png";
+import FoodJson from "../assets/sprites/generic/food/food.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -30,6 +34,8 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("poo_bullet", PooBulletPng, PooBulletJson);
     this.load.aseprite("tree", TreePng, TreeJson);
     this.load.aseprite("cloud", CloudPng, CloudJson);
+    this.load.aseprite("poo_level", PooLevelPng, PooLevelJson);
+    this.load.aseprite("food", FoodPng, FoodJson);
     this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);
