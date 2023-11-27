@@ -16,6 +16,7 @@ export class LevelMap {
   private topLayer: Phaser.Tilemaps.TilemapLayer | null;
   private backgroundLayer: Phaser.Tilemaps.TilemapLayer | null;
   private solidLayer: Phaser.Tilemaps.TilemapLayer | null;
+  private solidBaseLayer: Phaser.Tilemaps.TilemapLayer | null;
   private objectsLayer: Phaser.Tilemaps.ObjectLayer | null;
 
   constructor(scene: Scene, currentLevel: LevelKey) {
@@ -47,6 +48,10 @@ export class LevelMap {
     return this.solidLayer;
   }
 
+  public getSolidBaseLayer() {
+    return this.solidBaseLayer;
+  }
+
   private createMapLayers() {
     this.map = this.scene.make.tilemap({ key: "levels" });
     this.tileset = this.map.addTilesetImage("tileset", "tileset")!;
@@ -54,6 +59,7 @@ export class LevelMap {
     this.backgroundLayer = this.map.createLayer(`${this.currentLevel}/background_layer`, `tileset`, 0, 0);
     this.topLayer = this.map.createLayer(`${this.currentLevel}/top_layer`, `tileset`, 0, 0);
     this.solidLayer = this.map.createLayer(`${this.currentLevel}/solid_layer`, `tileset`, 0, 0);
+    this.solidBaseLayer = this.map.createLayer(`${this.currentLevel}/solid_base_layer`, `tileset`, 0, 0);
   }
 
   private configureSolidLayer() {
@@ -73,6 +79,13 @@ export class LevelMap {
         }
       })
       this.solidLayer.setVisible(false);
+    }
+    if (this.solidBaseLayer) {
+      this.solidBaseLayer.setCollisionByProperty({
+        solid: true
+      })
+      this.solidBaseLayer.setVisible(false);
+
     }
   }
 

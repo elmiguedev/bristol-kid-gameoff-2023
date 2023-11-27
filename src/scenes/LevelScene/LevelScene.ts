@@ -31,6 +31,7 @@ export class LevelScene extends Phaser.Scene {
     this.entityManager = new EntityManager(this, this.levelMap);
     this.entityManager.createKid()
     this.entityManager.createEnemies();
+    this.entityManager.createClouds();
   }
 
   createBehaviors() {
@@ -41,7 +42,9 @@ export class LevelScene extends Phaser.Scene {
   configureCamera() {
     this.cameras.main.setBounds(0, 0, 6400, 1280);
     this.cameras.main.startFollow(this.entityManager.getKid(), true);
-    this.cameras.main.setBackgroundColor(0xd77bba)
+    this.cameras.main.setBackgroundColor(0x7d99ff)
+    // this.cameras.main.setBackgroundColor(0xd77bba)
+
   }
 
   update() {

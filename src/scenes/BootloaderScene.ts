@@ -12,7 +12,10 @@ import BlobBulletPng from "../assets/sprites/generic/blob_bullet/blob_bullet.png
 import BlobBulletJson from "../assets/sprites/generic/blob_bullet/blob_bullet.json";
 import PooBulletPng from "../assets/sprites/generic/poo_bullet/poo_bullet.png";
 import PooBulletJson from "../assets/sprites/generic/poo_bullet/poo_bullet.json";
-
+import TreePng from "../assets/sprites/generic/tree/tree.png";
+import TreeJson from "../assets/sprites/generic/tree/tree.json";
+import CloudPng from "../assets/sprites/generic/cloud/cloud.png";
+import CloudJson from "../assets/sprites/generic/cloud/cloud.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -25,6 +28,8 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("enemy_tank", TankPng, TankJson);
     this.load.aseprite("blob_bullet", BlobBulletPng, BlobBulletJson);
     this.load.aseprite("poo_bullet", PooBulletPng, PooBulletJson);
+    this.load.aseprite("tree", TreePng, TreeJson);
+    this.load.aseprite("cloud", CloudPng, CloudJson);
     this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);

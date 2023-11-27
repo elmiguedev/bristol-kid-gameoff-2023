@@ -3,6 +3,8 @@ import { LevelMap } from "../../entities/LevelMap";
 import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
 import { Bullet } from "../../entities/generic/Bullet";
+import { Cloud } from "../../entities/generic/Cloud";
+import { Tree } from "../../entities/generic/Tree";
 import { LevelScene } from "./LevelScene";
 
 export class EntityManager {
@@ -13,6 +15,7 @@ export class EntityManager {
   private kid!: Kid;
   private enemies!: Phaser.Physics.Arcade.Group;
   private bullets!: Phaser.Physics.Arcade.Group;
+  private clouds!: Phaser.Physics.Arcade.Group;
 
   constructor(scene: LevelScene, map: LevelMap) {
     this.scene = scene;
@@ -43,6 +46,7 @@ export class EntityManager {
     });
     this.map.getObjects().forEach((object) => {
       this.createEnemy(object);
+      this.createObjects(object);
     });
   }
 
@@ -77,5 +81,32 @@ export class EntityManager {
         tank.patrol();
         break;
     }
+  }
+
+  private createObjects(object: Phaser.Types.Tilemaps.TiledObject) {
+    switch (object.type) {
+      case "tree":
+        const tree = new Tree(this.scene, object.x, object.y);
+        break;
+    }
+  }
+
+  public createClouds() {
+    this.clouds = this.scene.physics.add.group({
+      maxSize: 100,
+      classType: Cloud,
+      allowGravity: false,
+      velocityY: 0,
+      velocityX: 100,
+      runChildUpdate: true,
+    })
+    this.scene.time.addEvent({
+      delay: 10000,
+      callback: () => {
+        const cloud = this.clouds.getFirstDead(true, 100, 100);
+        cloud.setPosition(100, 800);
+      },
+      loop: true
+    })
   }
 }

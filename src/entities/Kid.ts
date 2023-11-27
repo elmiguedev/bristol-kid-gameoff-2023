@@ -6,6 +6,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   private pooing: boolean = false;
   private punching: boolean = false;
   private life: number = 10;
+  private isStepDownState: boolean = false;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
 
@@ -16,6 +17,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.existing(this);
     this.anims.createFromAseprite("kid");
     this.setOrigin(0.5, 1);
+    this.setDepth(20);
 
     this.body.setSize(64, 110)
     this.body.setOffset(32, 62);
@@ -107,6 +109,21 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   public stopMovement() {
     this.setVelocityX(0);
   }
+
+  public stepDown() {
+    this.isStepDownState = true;
+    this.scene.time.addEvent({
+      delay: 200,
+      callback: () => {
+        this.isStepDownState = false;
+      }
+    })
+  }
+
+  public isStepDown() {
+    return this.isStepDownState;
+  }
+
 
   // animations 
   // --------------

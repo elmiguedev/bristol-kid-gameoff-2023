@@ -38,6 +38,10 @@ export class BehaviorManager {
       this.entityManager.getKid().jump();
     }
 
+    if (this.cursorKeys.down.isDown) {
+      this.entityManager.getKid().stepDown();
+    }
+
     if (this.cursorKeys.space.isDown) {
       this.entityManager.getKid().poo();
       //this.entityManager.getKid().punch();
@@ -47,7 +51,12 @@ export class BehaviorManager {
   public checkCollisions() {
 
     // 1. collisions between entities and solid tiles
-    this.scene.physics.collide(this.entityManager.getKid(), this.map.getSolidLayer())
+    this.scene.physics.collide(this.entityManager.getKid(), this.map.getSolidBaseLayer())
+
+    if (!this.entityManager.getKid().isStepDown()) {
+      this.scene.physics.collide(this.entityManager.getKid(), this.map.getSolidLayer())
+    }
+
     this.scene.physics.collide(this.entityManager.getEnemies(), this.map.getSolidLayer())
 
     // 2. collisions between entities bullets and solid tiles

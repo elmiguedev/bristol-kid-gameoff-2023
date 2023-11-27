@@ -1,0 +1,71 @@
+{ "frames": {
+   "0": {
+    "frame": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "sourceSize": { "w": 580, "h": 576 },
+    "duration": 83
+   },
+   "1": {
+    "frame": { "x": 580, "y": 0, "w": 580, "h": 576 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "sourceSize": { "w": 580, "h": 576 },
+    "duration": 83
+   },
+   "2": {
+    "frame": { "x": 1160, "y": 0, "w": 580, "h": 576 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "sourceSize": { "w": 580, "h": 576 },
+    "duration": 83
+   },
+   "3": {
+    "frame": { "x": 1740, "y": 0, "w": 580, "h": 576 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "sourceSize": { "w": 580, "h": 576 },
+    "duration": 83
+   },
+   "4": {
+    "frame": { "x": 2320, "y": 0, "w": 580, "h": 576 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "sourceSize": { "w": 580, "h": 576 },
+    "duration": 83
+   },
+   "5": {
+    "frame": { "x": 2900, "y": 0, "w": 580, "h": 576 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 576 },
+    "sourceSize": { "w": 580, "h": 576 },
+    "duration": 83
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.40-x64",
+  "image": "tree.png",
+  "format": "RGBA8888",
+  "size": { "w": 3480, "h": 576 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "idle", "from": 0, "to": 2, "direction": "forward" },
+   { "name": "idle_platform", "from": 3, "to": 5, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Tronco", "opacity": 255, "blendMode": "normal" },
+   { "name": "Shadow", "opacity": 255, "blendMode": "normal" },
+   { "name": "Flores-", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

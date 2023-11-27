@@ -24,15 +24,15 @@
                 3,
                 5
             ],
-            "scale": 0.2928,
-            "selectedLayer": 8,
+            "scale": 0.25,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 2086.748633879781,
-                "y": -17.076502732240442
+                "x": 1520,
+                "y": 28
             }
         },
         "levels.json#tileset": {
-            "scaleInDock": 1,
+            "scaleInDock": 0.5,
             "scaleInEditor": 1
         }
     },
