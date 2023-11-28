@@ -1,4 +1,5 @@
 export const KID_VELOCITY_X = 300;
+export const MIN_KID_VELOCITY_X = 100;
 export const KID_JUMP_VELOCITY = 650;
 export const GRAVITY = 1300;
 export const POO_TIME = 200;

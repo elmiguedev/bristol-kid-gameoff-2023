@@ -389,8 +389,176 @@
                          "type":"food",
                          "visible":true,
                          "width":64,
-                         "x":1596,
-                         "y":1036
+                         "x":1608,
+                         "y":976
+                        }, 
+                        {
+                         "gid":236,
+                         "height":64,
+                         "id":18,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":1856,
+                         "y":1024
+                        }, 
+                        {
+                         "gid":236,
+                         "height":64,
+                         "id":19,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":3392,
+                         "y":1024
+                        }, 
+                        {
+                         "gid":237,
+                         "height":64,
+                         "id":20,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":2688,
+                         "y":896
+                        }, 
+                        {
+                         "gid":237,
+                         "height":64,
+                         "id":21,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":2752,
+                         "y":960
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":22,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":3712,
+                         "y":1024
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":23,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":3776,
+                         "y":960
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":24,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":4672,
+                         "y":1024
+                        }, 
+                        {
+                         "gid":253,
+                         "height":64,
+                         "id":25,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":4928,
+                         "y":960
+                        }, 
+                        {
+                         "gid":236,
+                         "height":64,
+                         "id":26,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":5256,
+                         "y":1016
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":27,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":896,
+                         "y":960
+                        }, 
+                        {
+                         "gid":253,
+                         "height":64,
+                         "id":30,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":1244,
+                         "y":972
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":31,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":320,
+                         "y":960
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":32,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":452,
+                         "y":948
+                        }, 
+                        {
+                         "gid":238,
+                         "height":64,
+                         "id":33,
+                         "name":"",
+                         "rotation":0,
+                         "type":"",
+                         "visible":true,
+                         "width":64,
+                         "x":528,
+                         "y":960
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -406,7 +574,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":18,
+ "nextobjectid":34,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
@@ -564,13 +732,44 @@
                         }]
                 }, 
                 {
+                 "id":235,
+                 "properties":[
+                        {
+                         "name":"foodType",
+                         "type":"string",
+                         "value":"pill"
+                        }],
+                 "type":"food"
+                }, 
+                {
+                 "id":236,
+                 "properties":[
+                        {
+                         "name":"foodType",
+                         "type":"string",
+                         "value":"carbon"
+                        }],
+                 "type":"food"
+                }, 
+                {
+                 "id":237,
+                 "properties":[
+                        {
+                         "name":"foodType",
+                         "type":"string",
+                         "value":"cheese"
+                        }],
+                 "type":"food"
+                }, 
+                {
                  "id":251,
                  "properties":[
                         {
                          "name":"foodType",
                          "type":"string",
                          "value":"apple"
-                        }]
+                        }],
+                 "type":"food"
                 }, 
                 {
                  "id":252,
@@ -579,7 +778,8 @@
                          "name":"foodType",
                          "type":"string",
                          "value":"burger"
-                        }]
+                        }],
+                 "type":"food"
                 }, 
                 {
                  "id":253,
@@ -588,7 +788,8 @@
                          "name":"foodType",
                          "type":"string",
                          "value":"apio"
-                        }]
+                        }],
+                 "type":"food"
                 }],
          "tilewidth":64
         }],

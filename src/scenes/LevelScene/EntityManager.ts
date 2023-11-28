@@ -108,6 +108,7 @@ export class EntityManager {
     switch (object.type) {
       case "food":
         const foodType = this.map.getTileObject(object.gid)["foodType"]
+        console.log(foodType)
         const food = new Food(this.scene, object.x, object.y, foodType);
         this.food.add(food);
         break;

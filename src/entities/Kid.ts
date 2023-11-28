@@ -1,4 +1,4 @@
-import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_POO_LEVEL, POO_TIME, POO_VELOCITY } from "../utils/Constants";
+import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_POO_LEVEL, MIN_KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
 import { PooBullet } from "./generic/PooBullet";
 
 export class Kid extends Phaser.Physics.Arcade.Sprite {
@@ -45,13 +45,13 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     switch (direction) {
       case 'left':
         this.setFlipX(true);
-        this.setVelocityX(-KID_VELOCITY_X);
+        this.setVelocityX(-this.getKidVelolity());
 
         break;
 
       case 'right':
         this.setFlipX(false);
-        this.setVelocityX(KID_VELOCITY_X);
+        this.setVelocityX(this.getKidVelolity());
 
         break;
       default:
@@ -161,6 +161,13 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     if (this.pooLevel <= 0) {
       this.pooLevel = 0;
     }
+  }
+
+  private getKidVelolity() {
+    const normalVelocity = KID_VELOCITY_X;
+    const bristolRate = this.bristolLevel / MAX_BRISTOL_LEVEL;
+    const bristolVelocity = normalVelocity - (normalVelocity * bristolRate * 0.5);
+    return Math.max(bristolVelocity, MIN_KID_VELOCITY_X);
   }
 
 

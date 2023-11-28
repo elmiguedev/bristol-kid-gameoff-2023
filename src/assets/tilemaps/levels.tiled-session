@@ -4,6 +4,9 @@
         "."
     ],
     "fileStates": {
+        "": {
+            "scaleInEditor": 1
+        },
         "C:/Users/miguel.moyano/Repositorio/RepositorioMigue/juegos/bristol-kid/src/assets/tilesets/tileset.tmx": {
             "expandedGroupLayers": [
                 3
@@ -25,10 +28,10 @@
                 5
             ],
             "scale": 0.25,
-            "selectedLayer": 5,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 1520,
-                "y": 28
+                "x": 660,
+                "y": 16
             }
         },
         "levels.json#tileset": {
