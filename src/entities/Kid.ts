@@ -1,4 +1,5 @@
 import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_POO_LEVEL, MIN_KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
+import { Diarrea } from "./generic/Diarrea";
 import { PooBullet } from "./generic/PooBullet";
 
 export class Kid extends Phaser.Physics.Arcade.Sprite {
@@ -11,6 +12,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   private bristolLevel: number = 35;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
+  public diarreaBullets!: Phaser.Physics.Arcade.Group;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "kid");
@@ -29,6 +31,13 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
       max: 20,
       allowGravity: false
     });
+    this.diarreaBullets = this.scene.physics.add.group({
+      classType: Diarrea,
+      max: 40,
+      allowGravity: true,
+      runChildUpdate: true
+    });
+
   }
 
   // update method
@@ -68,7 +77,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
 
   public poo() {
     this.pooing = true;
-    this.decreasePooLevel();
+    this.decreasePooLevel(2);
     const poo = this.pooBullets.getFirstDead(true);
     const pooOffsetX = this.flipX ? 32 : -32;
     poo.setPosition(this.x + pooOffsetX, this.y - 32);
@@ -79,6 +88,27 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     }
 
     this.scene.time.delayedCall(POO_TIME, () => {
+      this.pooing = false;
+    })
+  }
+
+  public diarrea() {
+    this.pooing = true;
+
+    const poo = this.diarreaBullets.getFirstDead(true);
+    const pooVelocityX = Phaser.Math.Between(50, 150);
+    this.decreasePooLevel();
+
+    const pooOffsetX = this.flipX ? 32 : -32;
+    poo.setScale(0.5);
+    poo.setAlpha(0.7);
+    poo.setPosition(this.x + pooOffsetX, this.y - 32);
+    poo.setVelocityX(pooVelocityX * (this.flipX ? 1 : -1));
+    poo.setDragX(100);
+
+
+
+    this.scene.time.delayedCall(20, () => {
       this.pooing = false;
     })
   }
@@ -170,6 +200,9 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     return Math.max(bristolVelocity, MIN_KID_VELOCITY_X);
   }
 
+
+  // Poo
+  // --------------
 
 
   // animations 

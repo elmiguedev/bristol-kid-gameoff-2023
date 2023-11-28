@@ -61,8 +61,14 @@ export class BehaviorManager {
 
     if (this.cursorKeys.space.isDown) {
       if (this.entityManager.getKid().canPoo()) {
-        this.hud.decreasePooLevel();
-        this.entityManager.getKid().poo();
+        if (this.entityManager.getKid().getBristolLevel() <= 50) {
+          this.entityManager.getKid().poo();
+          this.hud.decreasePooLevel(2);
+
+        } else {
+          this.hud.decreasePooLevel();
+          this.entityManager.getKid().diarrea();
+        }
       }
     }
   }
@@ -83,6 +89,12 @@ export class BehaviorManager {
       poo.destroy();
     })
 
+    this.scene.physics.collide(this.entityManager.getKid().diarreaBullets, this.map.getSolidLayer(), (poo, layer) => {
+      this.scene.time.delayedCall(2000, () => {
+        poo.destroy();
+      })
+    })
+
     this.scene.physics.collide(this.entityManager.getBullets(), this.map.getSolidLayer(), (bullet, layer) => {
       bullet.destroy();
     })
@@ -98,6 +110,14 @@ export class BehaviorManager {
     })
 
     this.scene.physics.overlap(this.entityManager.getKid().pooBullets, this.entityManager.getEnemies(), (poo, enemy: Enemy) => {
+      poo.destroy();
+      enemy.hurt();
+      if (enemy.isDead()) {
+        enemy.destroy();
+      }
+    })
+
+    this.scene.physics.overlap(this.entityManager.getKid().diarreaBullets, this.entityManager.getEnemies(), (poo, enemy: Enemy) => {
       poo.destroy();
       enemy.hurt();
       if (enemy.isDead()) {

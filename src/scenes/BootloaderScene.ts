@@ -24,6 +24,8 @@ import BristolScalePng from "../assets/sprites/hud/bristol_scale/bristol_scale.p
 import BristolScaleJson from "../assets/sprites/hud/bristol_scale/bristol_scale.json";
 import BristolScaleContainerPng from "../assets/sprites/hud/bristol_scale_container/bristol_scale_container.png";
 import BristolScaleContainerJson from "../assets/sprites/hud/bristol_scale_container/bristol_scale_container.json";
+import DiarreaPng from "../assets/sprites/generic/diarrea/diarrea.png";
+import DiarreaJson from "../assets/sprites/generic/diarrea/diarrea.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -42,6 +44,7 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("food", FoodPng, FoodJson);
     this.load.aseprite("bristol_scale", BristolScalePng, BristolScaleJson);
     this.load.aseprite("bristol_scale_container", BristolScaleContainerPng, BristolScaleContainerJson);
+    this.load.aseprite("diarrea", DiarreaPng, DiarreaJson);
     this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);
