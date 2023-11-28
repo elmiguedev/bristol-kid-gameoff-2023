@@ -40,6 +40,7 @@ export class LevelScene extends Phaser.Scene {
   createBehaviors() {
     this.behaviorManager = new BehaviorManager(this, this.levelMap, this.entityManager, this.hud);
     this.behaviorManager.createKeys();
+    this.behaviorManager.createBristolScaleTimer();
   }
 
   configureCamera() {

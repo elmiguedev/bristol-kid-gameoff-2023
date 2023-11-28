@@ -20,6 +20,10 @@ import PooLevelPng from "../assets/sprites/hud/poo_level/poo_level.png";
 import PooLevelJson from "../assets/sprites/hud/poo_level/poo_level.json";
 import FoodPng from "../assets/sprites/generic/food/food.png";
 import FoodJson from "../assets/sprites/generic/food/food.json";
+import BristolScalePng from "../assets/sprites/hud/bristol_scale/bristol_scale.png";
+import BristolScaleJson from "../assets/sprites/hud/bristol_scale/bristol_scale.json";
+import BristolScaleContainerPng from "../assets/sprites/hud/bristol_scale_container/bristol_scale_container.png";
+import BristolScaleContainerJson from "../assets/sprites/hud/bristol_scale_container/bristol_scale_container.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -36,6 +40,8 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("cloud", CloudPng, CloudJson);
     this.load.aseprite("poo_level", PooLevelPng, PooLevelJson);
     this.load.aseprite("food", FoodPng, FoodJson);
+    this.load.aseprite("bristol_scale", BristolScalePng, BristolScaleJson);
+    this.load.aseprite("bristol_scale_container", BristolScaleContainerPng, BristolScaleContainerJson);
     this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);

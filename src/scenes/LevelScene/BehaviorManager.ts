@@ -4,6 +4,7 @@ import { EntityManager } from "./EntityManager";
 import { Enemy } from "../../entities/enemies/Enemy";
 import { LevelHud } from "./LevelHud";
 import { Food } from "../../entities/generic/Food";
+import { BRISTOL_SCALE_TIMER, BRISTOL_SCALE_TIMER_INCREASE } from "../../utils/Constants";
 
 export class BehaviorManager {
   private scene: LevelScene;
@@ -27,6 +28,17 @@ export class BehaviorManager {
 
   public createKeys() {
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
+  }
+
+  public createBristolScaleTimer() {
+    this.scene.time.addEvent({
+      delay: BRISTOL_SCALE_TIMER,
+      callback: () => {
+        this.entityManager.getKid().increaseBristolScale(BRISTOL_SCALE_TIMER_INCREASE);
+        this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
+      },
+      loop: true
+    })
   }
 
   public checkKeys() {
@@ -91,20 +103,17 @@ export class BehaviorManager {
       if (enemy.isDead()) {
         enemy.destroy();
       }
-      // this.entityManager.getKid().takeDamage(1);
-      // this.scene.cameras.main.shake(100, 0.01);
-      // if (this.entityManager.getKid().isDead()) {
-      //   this.scene.scene.start("GameOverScene");
-      // }
     })
 
     // 4. collisions between kid and food
     this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getFood(), (kid, food: Food) => {
       const foodValue = food.getFoodValue();
+      const foodBristolValue = food.getBristolValue();
       food.destroy();
       this.entityManager.getKid().increasePooLevel(foodValue);
+      this.entityManager.getKid().increaseBristolScale(foodBristolValue);
       this.hud.increasePooLevel(foodValue);
-      // Add your code here to handle the collision between kid and food
+      this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
     });
 
 

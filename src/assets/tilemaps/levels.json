@@ -365,7 +365,7 @@
                          "type":"food",
                          "visible":true,
                          "width":64,
-                         "x":2688,
+                         "x":2560,
                          "y":964
                         }, 
                         {
@@ -377,8 +377,20 @@
                          "type":"food",
                          "visible":true,
                          "width":64,
-                         "x":3260,
-                         "y":972
+                         "x":3136,
+                         "y":960
+                        }, 
+                        {
+                         "gid":253,
+                         "height":64,
+                         "id":17,
+                         "name":"",
+                         "rotation":0,
+                         "type":"food",
+                         "visible":true,
+                         "width":64,
+                         "x":1596,
+                         "y":1036
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -394,7 +406,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":17,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

@@ -5,3 +5,6 @@ export const POO_TIME = 200;
 export const POO_VELOCITY = 1200;
 export const ENEMY_DEFAULT_TARGET_RADIUS = 256;
 export const MAX_POO_LEVEL = 20;
+export const MAX_BRISTOL_LEVEL = 70;
+export const BRISTOL_SCALE_TIMER = 1000;
+export const BRISTOL_SCALE_TIMER_INCREASE = 1;

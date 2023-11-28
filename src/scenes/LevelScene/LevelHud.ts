@@ -1,8 +1,10 @@
+import { BristolScale } from "../../entities/hud/BristolScale";
 import { MAX_POO_LEVEL } from "../../utils/Constants";
 
 export class LevelHud extends Phaser.Scene {
 
   private pooLevelSprite: Phaser.GameObjects.Sprite;
+  private bristolScale: BristolScale;
   private txt: Phaser.GameObjects.Text;
 
   constructor() {
@@ -11,6 +13,7 @@ export class LevelHud extends Phaser.Scene {
 
   create() {
     this.createPooLevel();
+    this.createBristolScale();
     this.txt = this.add.text(20, 20, "ss");
   }
 
@@ -47,5 +50,19 @@ export class LevelHud extends Phaser.Scene {
     }
 
   }
+
+  public setBristolLevel(level: number) {
+    this.bristolScale.setLevel(level);
+  }
+
+  private createBristolScale() {
+    this.bristolScale = new BristolScale(
+      this,
+      20,
+      20
+    );
+  }
+
+
 
 }

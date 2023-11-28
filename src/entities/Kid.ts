@@ -1,4 +1,4 @@
-import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_POO_LEVEL, POO_TIME, POO_VELOCITY } from "../utils/Constants";
+import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_POO_LEVEL, POO_TIME, POO_VELOCITY } from "../utils/Constants";
 import { PooBullet } from "./generic/PooBullet";
 
 export class Kid extends Phaser.Physics.Arcade.Sprite {
@@ -8,6 +8,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   private life: number = 10;
   private isStepDownState: boolean = false;
   private pooLevel: number = MAX_POO_LEVEL;
+  private bristolLevel: number = 35;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
 
@@ -139,6 +140,20 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     if (this.pooLevel >= MAX_POO_LEVEL) {
       this.pooLevel = MAX_POO_LEVEL;
     }
+  }
+
+  public increaseBristolScale(value: number) {
+    this.bristolLevel += value;
+    if (this.bristolLevel >= MAX_BRISTOL_LEVEL) {
+      this.bristolLevel = MAX_BRISTOL_LEVEL;
+    }
+    if (this.bristolLevel <= 0) {
+      this.bristolLevel = 0;
+    }
+  }
+
+  public getBristolLevel() {
+    return this.bristolLevel;
   }
 
   public decreasePooLevel(value: number = 1) {
