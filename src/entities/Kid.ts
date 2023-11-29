@@ -52,10 +52,6 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   public update() {
     this.checkFartPosition();
     this.playAnimation();
-
-    if (this.body.velocity.y > 0) {
-      console.log(this.body.velocity.y)
-    }
   }
 
   // actions 

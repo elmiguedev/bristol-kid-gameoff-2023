@@ -32,6 +32,9 @@ import FartLevelPng from "../assets/sprites/hud/fart_level/fart_level.png";
 import FartLevelJson from "../assets/sprites/hud/fart_level/fart_level.json";
 import LifeBarPng from "../assets/sprites/hud/life_level/life_level.png";
 import LifeBarJson from "../assets/sprites/hud/life_level/life_level.json";
+import TrenchSoldierPng from "../assets/sprites/enemies/trench_soldier/trench_soldier.png";
+import TrenchSoldierJson from "../assets/sprites/enemies/trench_soldier/trench_soldier.json";
+
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -54,6 +57,8 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("fart", FartPng, FartJson);
     this.load.aseprite("fart_level", FartLevelPng, FartLevelJson);
     this.load.aseprite("life_level", LifeBarPng, LifeBarJson);
+    this.load.aseprite("trench_soldier", TrenchSoldierPng, TrenchSoldierJson);
+
     this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);

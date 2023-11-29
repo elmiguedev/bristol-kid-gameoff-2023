@@ -5,6 +5,7 @@ import { Enemy } from "../../entities/enemies/Enemy";
 import { LevelHud } from "./LevelHud";
 import { Food } from "../../entities/generic/Food";
 import { BRISTOL_SCALE_TIMER, BRISTOL_SCALE_TIMER_INCREASE } from "../../utils/Constants";
+import { BlobBomb } from "../../entities/generic/BlobBomb";
 
 export class BehaviorManager {
   private scene: LevelScene;
@@ -36,7 +37,6 @@ export class BehaviorManager {
       delay: BRISTOL_SCALE_TIMER,
       callback: () => {
         this.entityManager.getKid().increaseBristolScale(BRISTOL_SCALE_TIMER_INCREASE);
-        // this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
       },
       loop: true
     })
@@ -99,13 +99,19 @@ export class BehaviorManager {
     })
 
     this.scene.physics.collide(this.entityManager.getBullets(), this.map.getSolidLayer(), (bullet, layer) => {
+      if (bullet instanceof BlobBomb) {
+        bullet.explode();
+      }
       bullet.destroy();
     })
 
     // 3. collisions between bullets and entities
     this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getBullets(), (kid, bullet) => {
+      if (bullet instanceof BlobBomb) {
+        bullet.explode();
+      }
       bullet.destroy();
-      this.entityManager.getKid().takeDamage(1);
+      this.entityManager.getKid().takeDamage(1); // TODO: cambiar segun la bala que sea vieja
       this.scene.cameras.main.shake(100, 0.01);
 
     })

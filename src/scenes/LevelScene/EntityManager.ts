@@ -2,6 +2,7 @@ import { Kid } from "../../entities/Kid";
 import { LevelMap } from "../../entities/LevelMap";
 import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
+import { TrenchSoldier } from "../../entities/enemies/TrenchSoldier";
 import { Bullet } from "../../entities/generic/Bullet";
 import { Cloud } from "../../entities/generic/Cloud";
 import { Food } from "../../entities/generic/Food";
@@ -91,6 +92,12 @@ export class EntityManager {
         tank.setBullets(this.bullets);
         tank.setTarget(this.kid);
         tank.patrol();
+        break;
+      case "trench_soldier":
+        const trenchSoldier = new TrenchSoldier(this.scene, object.x, object.y);
+        this.enemies.add(trenchSoldier);
+        trenchSoldier.setBullets(this.bullets);
+        trenchSoldier.setTarget(this.kid);
         break;
     }
   }

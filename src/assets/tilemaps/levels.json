@@ -257,7 +257,7 @@
                          "type":"kid",
                          "visible":true,
                          "width":0,
-                         "x":1465.55688027819,
+                         "x":1201.55688027819,
                          "y":1124.86934923
                         }, 
                         {
@@ -559,6 +559,24 @@
                          "width":64,
                          "x":528,
                          "y":960
+                        }, 
+                        {
+                         "height":0,
+                         "id":34,
+                         "name":"trench_soldier",
+                         "point":true,
+                         "properties":[
+                                {
+                                 "name":"walk_radius",
+                                 "type":"int",
+                                 "value":0
+                                }],
+                         "rotation":0,
+                         "type":"trench_soldier",
+                         "visible":true,
+                         "width":0,
+                         "x":1872,
+                         "y":1136
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -574,7 +592,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":34,
+ "nextobjectid":35,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
