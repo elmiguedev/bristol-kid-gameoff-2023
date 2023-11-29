@@ -83,7 +83,6 @@ export class EntityManager {
         enemySoldier.setBullets(this.bullets);
         enemySoldier.setTarget(this.kid);
         const walkRadius = object.properties.find(p => p.name === "walk_radius").value || 64;
-        console.log(walkRadius)
         enemySoldier.patrol(walkRadius);
         break;
       case "enemy_tank":
@@ -108,7 +107,6 @@ export class EntityManager {
     switch (object.type) {
       case "food":
         const foodType = this.map.getTileObject(object.gid)["foodType"]
-        console.log(foodType)
         const food = new Food(this.scene, object.x, object.y, foodType);
         this.food.add(food);
         break;

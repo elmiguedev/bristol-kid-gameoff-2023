@@ -87,7 +87,7 @@ export class LevelMap {
     if (this.solidBaseLayer) {
       this.solidBaseLayer.setCollisionByProperty({
         solid: true
-      })
+      });
       this.solidBaseLayer.setVisible(false);
 
     }

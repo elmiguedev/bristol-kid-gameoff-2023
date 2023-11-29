@@ -7,22 +7,37 @@ export enum FoodType {
   PILL = "pill",
 }
 
-export const FOOD_VALUE = {
-  [FoodType.APPLE]: 5,
-  [FoodType.BURGER]: 15,
-  [FoodType.APIO]: 3,
-  [FoodType.CHEESE]: 7,
-  [FoodType.CARBON]: 0,
-  [FoodType.PILL]: 0
-}
-
-export const FOOD_BRISTOL_VALUE = {
-  [FoodType.APPLE]: 5,
-  [FoodType.BURGER]: 10,
-  [FoodType.APIO]: 1,
-  [FoodType.CHEESE]: -10,
-  [FoodType.CARBON]: -30,
-  [FoodType.PILL]: -50
+export const FOOD_VALUES = {
+  [FoodType.APPLE]: {
+    poo: 5,
+    fart: 5,
+    bristol: 5
+  },
+  [FoodType.BURGER]: {
+    poo: 15,
+    fart: 40,
+    bristol: 10
+  },
+  [FoodType.APIO]: {
+    poo: 3,
+    fart: 0,
+    bristol: 1
+  },
+  [FoodType.CHEESE]: {
+    poo: 7,
+    fart: 30,
+    bristol: -10
+  },
+  [FoodType.CARBON]: {
+    poo: 0,
+    fart: 20,
+    bristol: -30
+  },
+  [FoodType.PILL]: {
+    poo: 0,
+    fart: 0,
+    bristol: -50
+  }
 }
 
 export class Food extends Phaser.Physics.Arcade.Sprite {
@@ -45,12 +60,16 @@ export class Food extends Phaser.Physics.Arcade.Sprite {
     }, true)
   }
 
-  public getFoodValue() {
-    return FOOD_VALUE[this.foodType];
+  public getPooValue() {
+    return FOOD_VALUES[this.foodType].poo;
   }
 
   public getBristolValue() {
-    return FOOD_BRISTOL_VALUE[this.foodType];
+    return FOOD_VALUES[this.foodType].bristol;
+  }
+
+  public getFartValue() {
+    return FOOD_VALUES[this.foodType].fart;
   }
 
 

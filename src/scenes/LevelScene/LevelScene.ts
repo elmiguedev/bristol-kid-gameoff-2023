@@ -52,6 +52,7 @@ export class LevelScene extends Phaser.Scene {
   createHud() {
     this.scene.run("LevelHud");
     this.hud = this.scene.get("LevelHud") as LevelHud;
+    this.hud.setKid(this.entityManager.getKid());
   }
 
   update() {

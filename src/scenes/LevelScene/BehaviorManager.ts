@@ -35,7 +35,7 @@ export class BehaviorManager {
       delay: BRISTOL_SCALE_TIMER,
       callback: () => {
         this.entityManager.getKid().increaseBristolScale(BRISTOL_SCALE_TIMER_INCREASE);
-        this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
+        // this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
       },
       loop: true
     })
@@ -63,13 +63,17 @@ export class BehaviorManager {
       if (this.entityManager.getKid().canPoo()) {
         if (this.entityManager.getKid().getBristolLevel() <= 50) {
           this.entityManager.getKid().poo();
-          this.hud.decreasePooLevel(2);
+          // this.hud.decreasePooLevel(2);
 
         } else {
-          this.hud.decreasePooLevel();
+          // this.hud.decreasePooLevel();
           this.entityManager.getKid().diarrea();
         }
       }
+    }
+
+    if (this.cursorKeys.shift.isDown) {
+      this.entityManager.getKid().fart();
     }
   }
 
@@ -127,13 +131,8 @@ export class BehaviorManager {
 
     // 4. collisions between kid and food
     this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getFood(), (kid, food: Food) => {
-      const foodValue = food.getFoodValue();
-      const foodBristolValue = food.getBristolValue();
-      food.destroy();
-      this.entityManager.getKid().increasePooLevel(foodValue);
-      this.entityManager.getKid().increaseBristolScale(foodBristolValue);
-      this.hud.increasePooLevel(foodValue);
-      this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
+      this.entityManager.getKid().eat(food);
+      // this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
     });
 
 

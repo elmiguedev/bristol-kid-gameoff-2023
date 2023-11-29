@@ -1,18 +1,23 @@
-import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_POO_LEVEL, MIN_KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
+import { GRAVITY, KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_FART_LEVEL, MAX_KID_VELOCITY_X, MAX_POO_LEVEL, MIN_KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
 import { Diarrea } from "./generic/Diarrea";
+import { Food } from "./generic/Food";
 import { PooBullet } from "./generic/PooBullet";
 
 export class Kid extends Phaser.Physics.Arcade.Sprite {
 
   private pooing: boolean = false;
+  private farting: boolean = false;
   private punching: boolean = false;
   private life: number = 10;
   private isStepDownState: boolean = false;
   private pooLevel: number = MAX_POO_LEVEL;
   private bristolLevel: number = 35;
+  private fartLevel: number = MAX_FART_LEVEL;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
   public diarreaBullets!: Phaser.Physics.Arcade.Group;
+
+  public fartCloud!: Phaser.Physics.Arcade.Sprite;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "kid");
@@ -25,6 +30,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
 
     this.body.setSize(64, 110)
     this.body.setOffset(32, 62);
+    this.setMaxVelocity(KID_VELOCITY_X, MAX_KID_VELOCITY_X);
 
     this.pooBullets = this.scene.physics.add.group({
       classType: PooBullet,
@@ -44,7 +50,12 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   // --------------
 
   public update() {
+    this.checkFartPosition();
     this.playAnimation();
+
+    if (this.body.velocity.y > 0) {
+      console.log(this.body.velocity.y)
+    }
   }
 
   // actions 
@@ -111,6 +122,63 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.scene.time.delayedCall(20, () => {
       this.pooing = false;
     })
+  }
+
+  public fart() {
+    if (this.fartLevel <= 0) {
+      return;
+    }
+
+    this.farting = true;
+
+    if (!this.fartCloud) {
+      this.fartCloud = this.scene.physics.add.sprite(this.x, this.y - 32, "fart");
+      // @ts-ignore
+      this.fartCloud.body.allowGravity = false;
+      this.fartCloud.anims.createFromAseprite("fart");
+      this.fartCloud.setVisible(false);
+      this.fartCloud.setActive(false);
+    }
+
+    if (this.body.blocked.down) {
+
+      this.fartCloud.setActive(true).setVisible(true);
+      this.fartCloud.setFlipX(!this.flipX)
+      this.fartCloud.setAngle(0);
+      this.fartCloud.anims.play({
+        key: "idle",
+        frameRate: 20,
+        repeat: -1
+      }, true)
+
+    } else {
+      this.fartCloud.setActive(true).setVisible(true);
+      this.fartCloud.setFlipX(!this.flipX)
+      this.fartCloud.setAngle(this.flipX ? 90 : -90);
+      this.setVelocityY(-220);
+      this.fartCloud.anims.play({
+        key: "idle",
+        frameRate: 20,
+        repeat: -1
+      }, true)
+    }
+    this.increaseFartLevel(-1);
+
+    this.scene.time.delayedCall(50, () => {
+      this.farting = false;
+      this.fartCloud.setVisible(false).setActive(false)
+    })
+  }
+
+  private checkFartPosition() {
+    if (this.fartCloud) {
+      if (this.body.blocked.down) {
+        const fartOffsetX = this.flipX ? 94 : -94;
+        this.fartCloud.setPosition(this.x + fartOffsetX, this.y - 32);
+      } else {
+        this.fartCloud.setPosition(this.x, this.y + 48);
+      }
+    }
   }
 
   public canPoo() {
@@ -182,6 +250,16 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  public increaseFartLevel(value: number = 1) {
+    this.fartLevel += value;
+    if (this.fartLevel >= MAX_FART_LEVEL) {
+      this.fartLevel = MAX_FART_LEVEL;
+    }
+    if (this.fartLevel <= 0) {
+      this.fartLevel = 0;
+    }
+  }
+
   public getBristolLevel() {
     return this.bristolLevel;
   }
@@ -200,6 +278,16 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     return Math.max(bristolVelocity, MIN_KID_VELOCITY_X);
   }
 
+  public getFartLevel() {
+    return this.fartLevel;
+  }
+
+  public eat(food: Food) {
+    this.increasePooLevel(food.getPooValue());
+    this.increaseBristolScale(food.getBristolValue());
+    this.increaseFartLevel(food.getFartValue());
+    food.destroy();
+  }
 
   // Poo
   // --------------
@@ -243,6 +331,13 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     }, true);
   }
 
+  private playFartAnimation() {
+    this.anims.play({
+      key: "fart_jump",
+      frameRate: 20
+    }, true);
+  }
+
   private playIdleAnimation() {
     this.anims.play("idle", true);
   }
@@ -252,6 +347,15 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
 
     if (this.pooing) {
       this.playPooAnimation();
+      return;
+    }
+
+    if (this.farting) {
+      if (this.body.blocked.down) {
+        this.playPooAnimation();
+      } else {
+        this.playFartAnimation();
+      }
       return;
     }
 
