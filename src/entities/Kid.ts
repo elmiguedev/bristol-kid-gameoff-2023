@@ -1,4 +1,4 @@
-import { GRAVITY, KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_FART_LEVEL, MAX_KID_VELOCITY_X, MAX_POO_LEVEL, MIN_KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
+import { KID_JUMP_VELOCITY, KID_VELOCITY_X, MAX_BRISTOL_LEVEL, MAX_FART_LEVEL, MAX_KID_LIFE, MAX_KID_VELOCITY_Y, MAX_POO_LEVEL, MIN_KID_VELOCITY_X, POO_TIME, POO_VELOCITY } from "../utils/Constants";
 import { Diarrea } from "./generic/Diarrea";
 import { Food } from "./generic/Food";
 import { PooBullet } from "./generic/PooBullet";
@@ -8,10 +8,10 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   private pooing: boolean = false;
   private farting: boolean = false;
   private punching: boolean = false;
-  private life: number = 10;
   private isStepDownState: boolean = false;
-  private pooLevel: number = MAX_POO_LEVEL;
   private bristolLevel: number = 35;
+  private life: number = MAX_KID_LIFE;
+  private pooLevel: number = MAX_POO_LEVEL;
   private fartLevel: number = MAX_FART_LEVEL;
 
   public pooBullets!: Phaser.Physics.Arcade.Group;
@@ -30,7 +30,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
 
     this.body.setSize(64, 110)
     this.body.setOffset(32, 62);
-    this.setMaxVelocity(KID_VELOCITY_X, MAX_KID_VELOCITY_X);
+    this.setMaxVelocity(KID_VELOCITY_X, MAX_KID_VELOCITY_Y);
 
     this.pooBullets = this.scene.physics.add.group({
       classType: PooBullet,
@@ -287,6 +287,10 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.increaseBristolScale(food.getBristolValue());
     this.increaseFartLevel(food.getFartValue());
     food.destroy();
+  }
+
+  public getLife() {
+    return this.life;
   }
 
   // Poo

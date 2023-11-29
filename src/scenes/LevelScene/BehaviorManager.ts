@@ -24,6 +24,7 @@ export class BehaviorManager {
   public update() {
     this.checkCollisions();
     this.checkKeys();
+    this.checkGameOver();
   }
 
   public createKeys() {
@@ -63,17 +64,15 @@ export class BehaviorManager {
       if (this.entityManager.getKid().canPoo()) {
         if (this.entityManager.getKid().getBristolLevel() <= 50) {
           this.entityManager.getKid().poo();
-          // this.hud.decreasePooLevel(2);
-
         } else {
-          // this.hud.decreasePooLevel();
           this.entityManager.getKid().diarrea();
         }
       }
     }
 
     if (this.cursorKeys.shift.isDown) {
-      this.entityManager.getKid().fart();
+      if (this.entityManager.getKid().getBristolLevel() < 50)
+        this.entityManager.getKid().fart();
     }
   }
 
@@ -108,9 +107,7 @@ export class BehaviorManager {
       bullet.destroy();
       this.entityManager.getKid().takeDamage(1);
       this.scene.cameras.main.shake(100, 0.01);
-      if (this.entityManager.getKid().isDead()) {
-        this.scene.scene.start("GameOverScene");
-      }
+
     })
 
     this.scene.physics.overlap(this.entityManager.getKid().pooBullets, this.entityManager.getEnemies(), (poo, enemy: Enemy) => {
@@ -132,11 +129,17 @@ export class BehaviorManager {
     // 4. collisions between kid and food
     this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getFood(), (kid, food: Food) => {
       this.entityManager.getKid().eat(food);
-      // this.hud.setBristolLevel(this.entityManager.getKid().getBristolLevel());
     });
 
 
 
+  }
+
+  checkGameOver() {
+    if (this.entityManager.getKid().isDead()) {
+      this.scene.scene.stop("LevelHud");
+      this.scene.scene.start("GameOverScene");
+    }
   }
 
 }

@@ -30,6 +30,8 @@ import FartPng from "../assets/sprites/generic/fart/fart.png";
 import FartJson from "../assets/sprites/generic/fart/fart.json";
 import FartLevelPng from "../assets/sprites/hud/fart_level/fart_level.png";
 import FartLevelJson from "../assets/sprites/hud/fart_level/fart_level.json";
+import LifeBarPng from "../assets/sprites/hud/life_level/life_level.png";
+import LifeBarJson from "../assets/sprites/hud/life_level/life_level.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -51,6 +53,7 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("diarrea", DiarreaPng, DiarreaJson);
     this.load.aseprite("fart", FartPng, FartJson);
     this.load.aseprite("fart_level", FartLevelPng, FartLevelJson);
+    this.load.aseprite("life_level", LifeBarPng, LifeBarJson);
     this.load.image("canon", CanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);
