@@ -11,4 +11,4 @@ export const MAX_FART_LEVEL = 200;
 export const MAX_BRISTOL_LEVEL = 70;
 export const BRISTOL_SCALE_TIMER = 1000;
 export const BRISTOL_SCALE_TIMER_INCREASE = 1;
-export const MAX_KID_LIFE = 10;
+export const MAX_KID_LIFE = 100;

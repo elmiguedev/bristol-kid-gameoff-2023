@@ -6,6 +6,7 @@ import { LevelHud } from "./LevelHud";
 import { Food } from "../../entities/generic/Food";
 import { BRISTOL_SCALE_TIMER, BRISTOL_SCALE_TIMER_INCREASE } from "../../utils/Constants";
 import { BlobBomb } from "../../entities/generic/BlobBomb";
+import { PaperBomb } from "../../entities/generic/PaperBomb";
 
 export class BehaviorManager {
   private scene: LevelScene;
@@ -105,6 +106,10 @@ export class BehaviorManager {
       bullet.destroy();
     })
 
+    this.scene.physics.collide(this.entityManager.getPaperBombs(), this.map.getSolidLayer(), (paper: PaperBomb, layer) => {
+      paper.roll();
+    })
+
     // 3. collisions between bullets and entities
     this.scene.physics.overlap(this.entityManager.getKid(), this.entityManager.getBullets(), (kid, bullet) => {
       if (bullet instanceof BlobBomb) {
@@ -113,10 +118,34 @@ export class BehaviorManager {
       bullet.destroy();
       this.entityManager.getKid().takeDamage(1); // TODO: cambiar segun la bala que sea vieja
       this.scene.cameras.main.shake(100, 0.01);
+    });
+
+    this.scene.physics.collide(this.entityManager.getKid(), this.entityManager.getPaperBombs(), (kid, bomb) => {
+      // bullet.destroy();
+      this.entityManager.getKid().takeDamage(1); // TODO: cambiar segun la bala que sea vieja
+      // this.entityManager.getKid().setVelocityX(-200); // TODO: cambiar segun la bala que sea vieja
+      this.scene.cameras.main.shake(100, 0.01);
+
 
     })
 
     this.scene.physics.overlap(this.entityManager.getKid().pooBullets, this.entityManager.getEnemies(), (poo, enemy: Enemy) => {
+      poo.destroy();
+      enemy.hurt();
+      if (enemy.isDead()) {
+        enemy.destroy();
+      }
+    })
+
+    this.scene.physics.overlap(this.entityManager.getKid().pooBullets, this.entityManager.getPaperBombs(), (poo, enemy: Enemy) => {
+      poo.destroy();
+      enemy.hurt();
+      if (enemy.isDead()) {
+        enemy.destroy();
+      }
+    })
+
+    this.scene.physics.overlap(this.entityManager.getKid().diarreaBullets, this.entityManager.getPaperBombs(), (poo, enemy: Enemy) => {
       poo.destroy();
       enemy.hurt();
       if (enemy.isDead()) {

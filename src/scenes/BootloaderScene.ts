@@ -7,7 +7,7 @@ import SoldierJson from "../assets/sprites/enemies/soldier/soldier.json";
 import BulletPng from "../assets/sprites/generic/bullet.png";
 import TankPng from "../assets/sprites/enemies/tank/tank.png";
 import TankJson from "../assets/sprites/enemies/tank/tank.json";
-import CanonPng from "../assets/sprites/enemies/tank/canon/canon.png";
+import TankCanonPng from "../assets/sprites/enemies/tank/canon/canon.png";
 import BlobBulletPng from "../assets/sprites/generic/blob_bullet/blob_bullet.png";
 import BlobBulletJson from "../assets/sprites/generic/blob_bullet/blob_bullet.json";
 import PooBulletPng from "../assets/sprites/generic/poo_bullet/poo_bullet.png";
@@ -34,6 +34,10 @@ import LifeBarPng from "../assets/sprites/hud/life_level/life_level.png";
 import LifeBarJson from "../assets/sprites/hud/life_level/life_level.json";
 import TrenchSoldierPng from "../assets/sprites/enemies/trench_soldier/trench_soldier.png";
 import TrenchSoldierJson from "../assets/sprites/enemies/trench_soldier/trench_soldier.json";
+import CannonPng from "../assets/sprites/enemies/cannon/cannon.png";
+import CannonJson from "../assets/sprites/enemies/cannon/cannon.json";
+import PaperPng from "../assets/sprites/generic/paper/paper.png";
+import PaperJson from "../assets/sprites/generic/paper/paper.json";
 
 
 export class BootloaderScene extends Phaser.Scene {
@@ -58,8 +62,10 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("fart_level", FartLevelPng, FartLevelJson);
     this.load.aseprite("life_level", LifeBarPng, LifeBarJson);
     this.load.aseprite("trench_soldier", TrenchSoldierPng, TrenchSoldierJson);
+    this.load.aseprite("cannon", CannonPng, CannonJson);
+    this.load.aseprite("paper", PaperPng, PaperJson);
 
-    this.load.image("canon", CanonPng);
+    this.load.image("canon", TankCanonPng);
     this.load.image("tileset", TilesetPng);
     this.load.tilemapTiledJSON("levels", LevelsJson);
     this.load.image("bullet", BulletPng);

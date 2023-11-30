@@ -575,7 +575,25 @@
                          "type":"trench_soldier",
                          "visible":true,
                          "width":0,
-                         "x":1872,
+                         "x":3260,
+                         "y":1004
+                        }, 
+                        {
+                         "height":0,
+                         "id":35,
+                         "name":"cannon",
+                         "point":true,
+                         "properties":[
+                                {
+                                 "name":"walk_radius",
+                                 "type":"int",
+                                 "value":0
+                                }],
+                         "rotation":0,
+                         "type":"cannon",
+                         "visible":true,
+                         "width":0,
+                         "x":1844,
                          "y":1136
                         }],
                  "opacity":1,
@@ -592,7 +610,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":35,
+ "nextobjectid":36,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

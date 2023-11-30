@@ -1,11 +1,13 @@
 import { Kid } from "../../entities/Kid";
 import { LevelMap } from "../../entities/LevelMap";
+import { Cannon } from "../../entities/enemies/Cannon";
 import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
 import { TrenchSoldier } from "../../entities/enemies/TrenchSoldier";
 import { Bullet } from "../../entities/generic/Bullet";
 import { Cloud } from "../../entities/generic/Cloud";
 import { Food } from "../../entities/generic/Food";
+import { PaperBomb } from "../../entities/generic/PaperBomb";
 import { Tree } from "../../entities/generic/Tree";
 import { LevelScene } from "./LevelScene";
 
@@ -17,6 +19,7 @@ export class EntityManager {
   private kid!: Kid;
   private enemies!: Phaser.Physics.Arcade.Group;
   private bullets!: Phaser.Physics.Arcade.Group;
+  private paperBombs!: Phaser.Physics.Arcade.Group;
   private clouds!: Phaser.Physics.Arcade.Group;
   private food!: Phaser.Physics.Arcade.Group;
 
@@ -51,6 +54,12 @@ export class EntityManager {
       classType: Food,
       allowGravity: false
     })
+    this.paperBombs = this.scene.physics.add.group({
+      maxSize: 100,
+      classType: PaperBomb,
+      allowGravity: true,
+      dragX: 100
+    })
     this.map.getObjects().forEach((object) => {
       this.createEnemy(object);
       this.createObject(object);
@@ -70,6 +79,10 @@ export class EntityManager {
 
   public getBullets() {
     return this.bullets;
+  }
+
+  public getPaperBombs() {
+    return this.paperBombs;
   }
 
   public getFood() {
@@ -98,6 +111,12 @@ export class EntityManager {
         this.enemies.add(trenchSoldier);
         trenchSoldier.setBullets(this.bullets);
         trenchSoldier.setTarget(this.kid);
+        break;
+      case "cannon":
+        const cannon = new Cannon(this.scene, object.x, object.y);
+        this.enemies.add(cannon);
+        cannon.setBullets(this.paperBombs);
+        cannon.setTarget(this.kid);
         break;
     }
   }

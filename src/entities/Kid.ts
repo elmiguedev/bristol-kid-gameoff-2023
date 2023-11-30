@@ -27,7 +27,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
     this.anims.createFromAseprite("kid");
     this.setOrigin(0.5, 1);
     this.setDepth(20);
-
+    this.setDragX(700);
     this.body.setSize(64, 110)
     this.body.setOffset(32, 62);
     this.setMaxVelocity(KID_VELOCITY_X, MAX_KID_VELOCITY_Y);
@@ -208,7 +208,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   }
 
   public stopMovement() {
-    this.setVelocityX(0);
+    // this.setVelocityX(0);
   }
 
   public stepDown() {
