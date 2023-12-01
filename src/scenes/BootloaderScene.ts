@@ -38,7 +38,8 @@ import CannonPng from "../assets/sprites/enemies/cannon/cannon.png";
 import CannonJson from "../assets/sprites/enemies/cannon/cannon.json";
 import PaperPng from "../assets/sprites/generic/paper/paper.png";
 import PaperJson from "../assets/sprites/generic/paper/paper.json";
-
+import TankOMaticPng from "../assets/sprites/enemies/tank_o_matic/tank_o_matic.png";
+import TankOMaticJson from "../assets/sprites/enemies/tank_o_matic/tank_o_matic.json";
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -64,6 +65,7 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("trench_soldier", TrenchSoldierPng, TrenchSoldierJson);
     this.load.aseprite("cannon", CannonPng, CannonJson);
     this.load.aseprite("paper", PaperPng, PaperJson);
+    this.load.aseprite("tank_o_matic", TankOMaticPng, TankOMaticJson);
 
     this.load.image("canon", TankCanonPng);
     this.load.image("tileset", TilesetPng);

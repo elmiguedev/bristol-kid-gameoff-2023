@@ -4,6 +4,7 @@ import { Cannon } from "../../entities/enemies/Cannon";
 import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
 import { TrenchSoldier } from "../../entities/enemies/TrenchSoldier";
+import { TankOMatic } from "../../entities/enemies/bosses/TankOMatic";
 import { Bullet } from "../../entities/generic/Bullet";
 import { Cloud } from "../../entities/generic/Cloud";
 import { Food } from "../../entities/generic/Food";
@@ -117,6 +118,12 @@ export class EntityManager {
         this.enemies.add(cannon);
         cannon.setBullets(this.paperBombs);
         cannon.setTarget(this.kid);
+        break;
+      case "tank_o_matic":
+        const tankOMatic = new TankOMatic(this.scene, object.x, object.y);
+        this.enemies.add(tankOMatic);
+        tankOMatic.setBullets(this.paperBombs);
+        tankOMatic.setTarget(this.kid);
         break;
     }
   }

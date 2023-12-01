@@ -593,8 +593,26 @@
                          "type":"cannon",
                          "visible":true,
                          "width":0,
-                         "x":1844,
-                         "y":1136
+                         "x":3956,
+                         "y":1124
+                        }, 
+                        {
+                         "height":0,
+                         "id":37,
+                         "name":"tank_o_matic",
+                         "point":true,
+                         "properties":[
+                                {
+                                 "name":"walk_radius",
+                                 "type":"int",
+                                 "value":128
+                                }],
+                         "rotation":0,
+                         "type":"tank_o_matic",
+                         "visible":true,
+                         "width":0,
+                         "x":1880,
+                         "y":1144
                         }],
                  "opacity":1,
                  "type":"objectgroup",
@@ -610,7 +628,7 @@
          "y":0
         }],
  "nextlayerid":13,
- "nextobjectid":36,
+ "nextobjectid":38,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
