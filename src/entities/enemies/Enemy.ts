@@ -9,6 +9,7 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   protected life: number = 1;
   protected patrolRadius: number = 128;
   protected patrolSpeed: number = 50;
+  protected patrolEnabled: boolean = false;
 
   public bullets: Phaser.Physics.Arcade.Group;
 
@@ -60,15 +61,18 @@ export class Enemy extends Phaser.Physics.Arcade.Sprite {
   }
 
   public patrol(radius?: number) {
+    this.patrolEnabled = true;
     if (radius) this.patrolRadius = radius;
     this.move("left");
   }
 
   protected checkPatrol() {
-    if (this.x <= this.initialPosition.x - this.patrolRadius) {
-      this.move('right');
-    } else if (this.x >= this.initialPosition.x! + this.patrolRadius) {
-      this.move("left");
+    if (this.patrolEnabled) {
+      if (this.x <= this.initialPosition.x - this.patrolRadius) {
+        this.move('right');
+      } else if (this.x >= this.initialPosition.x! + this.patrolRadius) {
+        this.move("left");
+      }
     }
   }
 
