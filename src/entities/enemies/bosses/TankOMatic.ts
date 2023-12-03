@@ -1,8 +1,11 @@
 import { Kid } from "../../Kid";
+import { BlobBullet } from "../../generic/BlobBullet";
 import { Enemy } from "../Enemy";
 
 export class TankOMatic extends Enemy {
 
+  private isFiring: boolean = false;
+  private fireCountdown: number = 50;
   private tackleTimer: Phaser.Time.TimerEvent;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -14,7 +17,8 @@ export class TankOMatic extends Enemy {
       delay: 3000,
       loop: true,
       callback: () => {
-        this.tackleAttack();
+        // this.tackleAttack();
+        this.fireAttack();
       }
     })
   }
@@ -35,10 +39,63 @@ export class TankOMatic extends Enemy {
     }, true)
   }
 
+  private playFireAnimation() {
+    this.anims.play({
+      key: "fire",
+      frameRate: 10,
+      repeat: -1
+    }, true)
+  }
+
   public tackleAttack() {
     this.shake(() => {
       this.tackle()
     })
+  }
+
+  public fireAttack() {
+    const timer = this.scene.time.addEvent({
+      delay: 100,
+      loop: true,
+      callback: () => {
+        this.shake(() => { // cambair shake por algo que anuncie los disparos
+          this.fire()
+        })
+      }
+    });
+    this.scene.time.delayedCall(1000, () => {
+      timer.destroy();
+    })
+  }
+
+  private fire() {
+    if (!this.isFiring) {
+
+      this.isFiring = true;
+      this.createBullet();
+      this.playFireAnimation();
+      this.scene.time.delayedCall(this.fireCountdown, () => {
+        this.isFiring = false;
+      })
+    }
+  }
+
+  private createBullet() {
+    const bulletOffsetDistance = 32;
+    const bulletOffset = this.body.velocity.x > 0 ? bulletOffsetDistance : -bulletOffsetDistance;
+    const bulletX = this.x + bulletOffset;
+    const bulletY = this.y - 74;
+    const bullet = new BlobBullet(this.scene, bulletX, bulletY);
+    bullet.setScale(0.3);
+    this.bullets.add(bullet);
+    const bulletVelocity = this.body.velocity.x > 0 ? 700 : -700;
+    bullet.setVelocityX(bulletVelocity);
+  }
+
+  private checkFire() {
+    if (!this.isFiring && this.isTargetVisible()) {
+      this.fire();
+    }
   }
 
   private shake(onComplete) {

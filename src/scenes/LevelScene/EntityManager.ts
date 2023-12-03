@@ -122,7 +122,7 @@ export class EntityManager {
       case "tank_o_matic":
         const tankOMatic = new TankOMatic(this.scene, object.x, object.y);
         this.enemies.add(tankOMatic);
-        tankOMatic.setBullets(this.paperBombs);
+        tankOMatic.setBullets(this.bullets);
         tankOMatic.setTarget(this.kid);
         break;
     }
