@@ -1,24 +1,31 @@
 import { Kid } from "../../Kid";
 import { BlobBullet } from "../../generic/BlobBullet";
+import { Towel } from "../../generic/Towel";
 import { Enemy } from "../Enemy";
 
 export class TankOMatic extends Enemy {
 
   private isFiring: boolean = false;
+  private isShaking: boolean = false;
   private fireCountdown: number = 50;
   private tackleTimer: Phaser.Time.TimerEvent;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "tank_o_matic");
     this.life = 30
+    this.targetRadius = 320;
     this.configureHitbox();
     this.playIdleAnimation();
     this.scene.time.addEvent({
-      delay: 3000,
+      startAt: 1000,
+      delay: 5500,
       loop: true,
       callback: () => {
-        // this.tackleAttack();
-        this.fireAttack();
+        switch (Phaser.Math.Between(1, 3)) {
+          case 1: this.tackleAttack(); break;
+          case 2: this.fireAttack(); break;
+          case 3: this.towelAttack(); break;
+        }
       }
     })
   }
@@ -47,25 +54,94 @@ export class TankOMatic extends Enemy {
     }, true)
   }
 
+  private playChargeAnimation() {
+    this.anims.play({
+      key: "charging",
+      frameRate: 12,
+      repeat: -1
+    }, true)
+  }
+
+  private playDoorAnimation() {
+    this.anims.play({
+      key: "door",
+      frameRate: 12,
+    }, true)
+  }
+
+  private playCameraAnimation() {
+    this.anims.play({
+      key: "camera",
+      frameRate: 10,
+      repeat: -1
+    }, true)
+  }
+
+  // attacks
+  // ------------------------ 
+
   public tackleAttack() {
-    this.shake(() => {
+    this.shake(2000, () => {
       this.tackle()
     })
   }
 
   public fireAttack() {
-    const timer = this.scene.time.addEvent({
-      delay: 100,
-      loop: true,
-      callback: () => {
-        this.shake(() => { // cambair shake por algo que anuncie los disparos
+    this.charging(() => {
+      this.shake();
+      const timer = this.scene.time.addEvent({
+        delay: 2,
+        loop: true,
+        callback: () => {
           this.fire()
-        })
-      }
-    });
-    this.scene.time.delayedCall(1000, () => {
-      timer.destroy();
+        }
+      });
+      this.scene.time.delayedCall(1500, () => {
+        timer.destroy();
+        this.playIdleAnimation();
+      })
     })
+
+  }
+
+  public towelAttack() {
+    this.cameraDetect(() => {
+      this.playDoorAnimation();
+      this.shake();
+      this.throwTowels();
+    })
+  }
+
+  // private methods
+  // ------------------------ 
+
+  private throwTowels() {
+    this.scene.time.addEvent({
+      delay: 400,
+      repeat: 7,
+      callback: () => {
+        this.createTowel();
+      },
+    });
+    this.scene.time.delayedCall(4000, () => {
+      this.playIdleAnimation();
+    })
+  }
+
+  private createTowel() {
+    const towelX = this.x - 120;
+    const towelY = this.y - 160;
+    const towel = new Towel(this.scene, towelX, towelY);
+    this.bullets.add(towel);
+    // @ts-ignore
+    towel.body.allowGravity = true;
+    towel.setDepth(this.depth - 1);
+    const towelVelocityX = Phaser.Math.Between(-700, -900);
+    const towelVelocityY = Phaser.Math.Between(0, -900);
+    towel.setVelocity(
+      towelVelocityX,
+      towelVelocityY
+    );
   }
 
   private fire() {
@@ -81,32 +157,54 @@ export class TankOMatic extends Enemy {
   }
 
   private createBullet() {
-    const bulletOffsetDistance = 32;
-    const bulletOffset = this.body.velocity.x > 0 ? bulletOffsetDistance : -bulletOffsetDistance;
-    const bulletX = this.x + bulletOffset;
-    const bulletY = this.y - 74;
+    const bulletX = this.x;
+    const bulletY = this.y - 330;
     const bullet = new BlobBullet(this.scene, bulletX, bulletY);
-    bullet.setScale(0.3);
+    bullet.setScale(0.7);
     this.bullets.add(bullet);
-    const bulletVelocity = this.body.velocity.x > 0 ? 700 : -700;
+    // @ts-ignore
+    bullet.body.allowGravity = true;
+    const bulletVelocity = Phaser.Math.Between(-300, -1000);
     bullet.setVelocityX(bulletVelocity);
   }
 
-  private checkFire() {
-    if (!this.isFiring && this.isTargetVisible()) {
-      this.fire();
+  private shake(duration?: number, onComplete?: Function) {
+    if (!this.isShaking) {
+      this.isShaking = true;
+      const position = {
+        x: this.x,
+        y: this.y
+      }
+      const tween = this.scene.tweens.add({
+        targets: this,
+        duration: 50,
+        x: position.x + 10,
+        y: position.y + 10,
+        yoyo: true,
+        repeat: -1
+      })
+      this.scene.time.delayedCall(duration || 3000, () => {
+        tween.destroy();
+        this.setPosition(position.x, position.y)
+        this.isShaking = false;
+        if (onComplete) {
+          onComplete();
+        }
+      })
     }
   }
 
-  private shake(onComplete) {
-    this.scene.tweens.add({
-      targets: this,
-      duration: 50,
-      x: this.x + 10,
-      y: this.y + 10,
-      yoyo: true,
-      repeat: 12,
-      onComplete: onComplete
+  private charging(onComplete) {
+    this.playChargeAnimation()
+    this.scene.time.delayedCall(3000, () => {
+      onComplete()
+    })
+  }
+
+  private cameraDetect(onComplete) {
+    this.playCameraAnimation()
+    this.scene.time.delayedCall(3000, () => {
+      onComplete()
     })
   }
 
@@ -114,6 +212,7 @@ export class TankOMatic extends Enemy {
     this.setVelocityX(-1000)
     this.tackleTimer = this.scene.time.delayedCall(300, () => {
       this.resetPosition();
+      this.playIdleAnimation();
     })
   }
 
@@ -137,6 +236,11 @@ export class TankOMatic extends Enemy {
     })
   }
 
+  public hurt() {
+    super.hurt();
+    this.shake(200);
+  }
+
   public setTarget(kid: Kid) {
     super.setTarget(kid);
     this.scene.physics.add.collider(this, kid, () => {
@@ -144,14 +248,6 @@ export class TankOMatic extends Enemy {
       this.resetPosition();
       this.resetTackleTimer();
       this.scene.cameras.main.shake(100, 0.01);
-      // this.scene.tweens.add({
-      //   targets: kid,
-      //   x: {
-      //     from: kid.x,
-      //     to: kid.x - 200
-      //   },
-      //   duration: 100
-      // })
     });
   }
 

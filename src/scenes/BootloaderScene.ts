@@ -40,6 +40,11 @@ import PaperPng from "../assets/sprites/generic/paper/paper.png";
 import PaperJson from "../assets/sprites/generic/paper/paper.json";
 import TankOMaticPng from "../assets/sprites/enemies/tank_o_matic/tank_o_matic.png";
 import TankOMaticJson from "../assets/sprites/enemies/tank_o_matic/tank_o_matic.json";
+import TowelPng from "../assets/sprites/generic/towel/towel.png";
+import TowelJson from "../assets/sprites/generic/towel/towel.json";
+import RolledTowelPng from "../assets/sprites/generic/rolled_towel/rolled_towel.png";
+import RolledTowelJson from "../assets/sprites/generic/rolled_towel/rolled_towel.json";
+
 
 export class BootloaderScene extends Phaser.Scene {
   constructor() {
@@ -66,6 +71,8 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("cannon", CannonPng, CannonJson);
     this.load.aseprite("paper", PaperPng, PaperJson);
     this.load.aseprite("tank_o_matic", TankOMaticPng, TankOMaticJson);
+    this.load.aseprite("towel", TowelPng, TowelJson);
+    this.load.aseprite("rolled_towel", RolledTowelPng, RolledTowelJson);
 
     this.load.image("canon", TankCanonPng);
     this.load.image("tileset", TilesetPng);

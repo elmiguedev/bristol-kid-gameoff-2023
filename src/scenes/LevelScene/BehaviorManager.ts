@@ -7,6 +7,7 @@ import { Food } from "../../entities/generic/Food";
 import { BRISTOL_SCALE_TIMER, BRISTOL_SCALE_TIMER_INCREASE } from "../../utils/Constants";
 import { BlobBomb } from "../../entities/generic/BlobBomb";
 import { PaperBomb } from "../../entities/generic/PaperBomb";
+import { Bullet } from "../../entities/generic/Bullet";
 
 export class BehaviorManager {
   private scene: LevelScene;
@@ -143,6 +144,11 @@ export class BehaviorManager {
       if (enemy.isDead()) {
         enemy.destroy();
       }
+    })
+
+    this.scene.physics.overlap(this.entityManager.getKid().pooBullets, this.entityManager.getBullets(), (poo, bullet: Bullet) => {
+      poo.destroy();
+      bullet.destroy();
     })
 
     this.scene.physics.overlap(this.entityManager.getKid().diarreaBullets, this.entityManager.getPaperBombs(), (poo, enemy: Enemy) => {
