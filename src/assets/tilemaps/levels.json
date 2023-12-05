@@ -611,8 +611,8 @@
                          "type":"tank_o_matic",
                          "visible":true,
                          "width":0,
-                         "x":1744,
-                         "y":1144
+                         "x":6112,
+                         "y":1132
                         }],
                  "opacity":1,
                  "type":"objectgroup",

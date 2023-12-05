@@ -44,6 +44,8 @@ import TowelPng from "../assets/sprites/generic/towel/towel.png";
 import TowelJson from "../assets/sprites/generic/towel/towel.json";
 import RolledTowelPng from "../assets/sprites/generic/rolled_towel/rolled_towel.png";
 import RolledTowelJson from "../assets/sprites/generic/rolled_towel/rolled_towel.json";
+import ZeppelinPng from "../assets/sprites/enemies/zeppelin/zeppelin.png";
+import ZeppelinJson from "../assets/sprites/enemies/zeppelin/zeppelin.json";
 
 
 export class BootloaderScene extends Phaser.Scene {
@@ -73,6 +75,7 @@ export class BootloaderScene extends Phaser.Scene {
     this.load.aseprite("tank_o_matic", TankOMaticPng, TankOMaticJson);
     this.load.aseprite("towel", TowelPng, TowelJson);
     this.load.aseprite("rolled_towel", RolledTowelPng, RolledTowelJson);
+    this.load.aseprite("zeppelin", ZeppelinPng, ZeppelinJson);
 
     this.load.image("canon", TankCanonPng);
     this.load.image("tileset", TilesetPng);

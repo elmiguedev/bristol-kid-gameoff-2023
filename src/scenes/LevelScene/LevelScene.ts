@@ -35,6 +35,7 @@ export class LevelScene extends Phaser.Scene {
     this.entityManager.createKid()
     this.entityManager.createObjects();
     this.entityManager.createClouds();
+    this.entityManager.createZeppelins();
   }
 
   createBehaviors() {

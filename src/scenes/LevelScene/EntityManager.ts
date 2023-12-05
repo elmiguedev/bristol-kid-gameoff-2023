@@ -4,12 +4,14 @@ import { Cannon } from "../../entities/enemies/Cannon";
 import { Soldier } from "../../entities/enemies/Soldier";
 import { Tank } from "../../entities/enemies/Tank";
 import { TrenchSoldier } from "../../entities/enemies/TrenchSoldier";
+import { Zeppelin } from "../../entities/enemies/Zeppelin";
 import { TankOMatic } from "../../entities/enemies/bosses/TankOMatic";
 import { Bullet } from "../../entities/generic/Bullet";
 import { Cloud } from "../../entities/generic/Cloud";
 import { Food } from "../../entities/generic/Food";
 import { PaperBomb } from "../../entities/generic/PaperBomb";
 import { Tree } from "../../entities/generic/Tree";
+import { ZEPPELIN_TIME } from "../../utils/Constants";
 import { LevelScene } from "./LevelScene";
 
 export class EntityManager {
@@ -23,6 +25,7 @@ export class EntityManager {
   private paperBombs!: Phaser.Physics.Arcade.Group;
   private clouds!: Phaser.Physics.Arcade.Group;
   private food!: Phaser.Physics.Arcade.Group;
+  private zeppelins!: Phaser.Physics.Arcade.Group;
 
   constructor(scene: LevelScene, map: LevelMap) {
     this.scene = scene;
@@ -61,6 +64,7 @@ export class EntityManager {
       allowGravity: true,
       dragX: 100
     })
+
     this.map.getObjects().forEach((object) => {
       this.createEnemy(object);
       this.createObject(object);
@@ -160,6 +164,26 @@ export class EntityManager {
       callback: () => {
         const cloud = this.clouds.getFirstDead(true, 100, 100);
         cloud.setPosition(100, 800);
+      },
+      loop: true
+    })
+  }
+
+  public createZeppelins() {
+    this.zeppelins = this.scene.physics.add.group({
+      maxSize: 4,
+      classType: Zeppelin,
+      allowGravity: false,
+      velocityY: 0,
+      velocityX: -100,
+      runChildUpdate: true,
+    })
+    this.scene.time.addEvent({
+      delay: ZEPPELIN_TIME,
+      callback: () => {
+        const zeppelin = this.zeppelins.getFirstDead(true, 100, 100);
+        if (zeppelin)
+          zeppelin.setPosition(this.scene.physics.world.bounds.width, 800);
       },
       loop: true
     })
