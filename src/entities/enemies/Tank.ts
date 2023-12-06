@@ -8,13 +8,19 @@ export class Tank extends Enemy {
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "enemy_tank");
     this.life = 20;
-    this.targetRadius = 700
+    this.targetRadius = 700;
+    this.configureHitbox();
     this.playAnimation();
   }
 
   public update() {
     super.update();
     this.checkFire();
+  }
+
+  private configureHitbox() {
+    this.body.setSize(172, 128);
+    this.body.setOffset(40, 128);
   }
 
   private playAnimation() {

@@ -14,11 +14,17 @@ export class TrenchSoldier extends Enemy {
     this.isFiring = false;
     this.life = 4;
     this.targetRadius = this.width * 3
+    this.configureHitbox();
   }
 
   public update() {
     super.update();
     this.checkFire();
+  }
+
+  private configureHitbox() {
+    this.body.setSize(100, 100);
+    this.body.setOffset(32, 28);
   }
 
   private checkFire() {

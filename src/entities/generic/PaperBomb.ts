@@ -6,6 +6,7 @@ export class PaperBomb extends Enemy {
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "paper");
+    this.configureHitbox();
     this.setScale(2);
     this.playAirAnimation();
   }
@@ -15,6 +16,11 @@ export class PaperBomb extends Enemy {
     this.scene.time.delayedCall(this.durationTime, () => {
       this.destroy();
     })
+  }
+
+  private configureHitbox() {
+    this.body.setSize(32, 32);
+    this.body.setOffset(16, 32);
   }
 
   private playAirAnimation() {

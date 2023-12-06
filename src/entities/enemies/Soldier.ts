@@ -16,11 +16,17 @@ export class Soldier extends Enemy {
     this.patrolSpeed = this.DEFAULT_SPEED;
     this.isFiring = false;
     this.life = 3;
+    this.configureHitbox();
   }
 
   public update() {
     super.update();
     this.checkFire();
+  }
+
+  private configureHitbox() {
+    this.body.setSize(64, 110);
+    this.body.setOffset(32, 18);
   }
 
   private checkFire() {
