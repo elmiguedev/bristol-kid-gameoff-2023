@@ -182,8 +182,11 @@ export class EntityManager {
       delay: ZEPPELIN_TIME,
       callback: () => {
         const zeppelin = this.zeppelins.getFirstDead(true, 100, 100);
-        if (zeppelin)
+        if (zeppelin) {
           zeppelin.setPosition(this.scene.physics.world.bounds.width, 800);
+          zeppelin.setBullets(this.bullets);
+          zeppelin.setPapers(this.paperBombs);
+        }
       },
       loop: true
     })

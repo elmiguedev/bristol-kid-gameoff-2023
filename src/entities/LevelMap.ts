@@ -64,6 +64,10 @@ export class LevelMap {
     this.topLayer = this.map.createLayer(`${this.currentLevel}/top_layer`, `tileset`, 0, 0);
     this.solidLayer = this.map.createLayer(`${this.currentLevel}/solid_layer`, `tileset`, 0, 0);
     this.solidBaseLayer = this.map.createLayer(`${this.currentLevel}/solid_base_layer`, `tileset`, 0, 0);
+
+    console.log(this.map.widthInPixels)
+
+    this.scene.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
   }
 
   private configureSolidLayer() {

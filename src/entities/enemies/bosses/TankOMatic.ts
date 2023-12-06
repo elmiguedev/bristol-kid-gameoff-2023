@@ -244,10 +244,10 @@ export class TankOMatic extends Enemy {
   public setTarget(kid: Kid) {
     super.setTarget(kid);
     this.scene.physics.add.collider(this, kid, () => {
-      console.log("overlap")
       this.resetPosition();
       this.resetTackleTimer();
       this.scene.cameras.main.shake(100, 0.01);
+      kid.takeDamage(2);
     });
   }
 

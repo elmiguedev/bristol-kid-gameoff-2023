@@ -24,14 +24,14 @@
         },
         "levels.json": {
             "expandedGroupLayers": [
-                3,
-                5
+                5,
+                3
             ],
             "scale": 0.25,
             "selectedLayer": 9,
             "viewCenter": {
-                "x": 656,
-                "y": 12
+                "x": 1772,
+                "y": 1072
             }
         },
         "levels.json#tileset": {
