@@ -15,7 +15,7 @@ export class BehaviorManager {
   private entityManager: EntityManager;
   private hud: LevelHud;
   private cursorKeys: Phaser.Types.Input.Keyboard.CursorKeys;
-
+  private plungerKey: Phaser.Input.Keyboard.Key;
 
   constructor(scene: LevelScene, map: LevelMap, entityManager: EntityManager, hud: LevelHud) {
     this.scene = scene;
@@ -32,6 +32,7 @@ export class BehaviorManager {
 
   public createKeys() {
     this.cursorKeys = this.scene.input.keyboard.createCursorKeys();
+    this.plungerKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
   }
 
   public createBristolScaleTimer() {
@@ -75,6 +76,11 @@ export class BehaviorManager {
     if (this.cursorKeys.shift.isDown) {
       if (this.entityManager.getKid().getBristolLevel() < 50)
         this.entityManager.getKid().fart();
+    }
+
+    if (this.plungerKey.isDown) {
+      if (this.entityManager.getKid().getBristolLevel() < 50)
+        this.entityManager.getKid().punch();
     }
   }
 
@@ -172,7 +178,27 @@ export class BehaviorManager {
       this.entityManager.getKid().eat(food);
     });
 
+    // 5. collisions between kid plunger and enemies
+    this.scene.physics.overlap(this.entityManager.getEnemies(), this.entityManager.getKid().punchZone, (plunger, enemy: Enemy) => {
+      plunger.destroy();
+      enemy.hurt();
+      if (enemy.isDead()) {
+        enemy.destroy();
+      }
+    })
 
+    this.scene.physics.overlap(this.entityManager.getPaperBombs(), this.entityManager.getKid().punchZone, (plunger, paper: Enemy) => {
+      plunger.destroy();
+      paper.hurt();
+      if (paper.isDead()) {
+        paper.destroy();
+      }
+    })
+
+    this.scene.physics.overlap(this.entityManager.getBullets(), this.entityManager.getKid().punchZone, (plunger, bullet: Bullet) => {
+      plunger.destroy();
+      bullet.destroy();
+    })
 
   }
 

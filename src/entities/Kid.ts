@@ -18,6 +18,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   public diarreaBullets!: Phaser.Physics.Arcade.Group;
 
   public fartCloud!: Phaser.Physics.Arcade.Sprite;
+  public punchZone!: Phaser.GameObjects.Zone;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "kid");
@@ -190,11 +191,15 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
       return;
     }
     this.punching = true;
-
+    this.createPunchZone();
+    this.playPunchAnimation();
     this.scene.time.addEvent({
       delay: 200,
       callback: () => {
         this.punching = false;
+        if (this.punchZone)
+          this.punchZone.destroy();
+
       }
     })
   }
@@ -306,7 +311,7 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
   private playPunchAnimation() {
     this.anims.play({
       key: "punch",
-      frameRate: 20
+      frameRate: 40
     }, true);
   }
 
@@ -359,32 +364,54 @@ export class Kid extends Phaser.Physics.Arcade.Sprite {
       return;
     }
 
-    if (this.punching) {
-      this.playPunchAnimation();
-      return;
-    }
-
-    if (this.body.blocked.down) {
-      if (this.body.velocity.x !== 0) {
-        this.playWalkAnimation();
-        return;
+    if (!this.punching) {
+      if (this.body.blocked.down) {
+        if (this.body.velocity.x !== 0) {
+          this.playWalkAnimation();
+          return;
+        } else {
+          this.playIdleAnimation();
+          return;
+        }
       } else {
-        this.playIdleAnimation();
-        return;
-      }
-    } else {
-      if (this.body.velocity.y < 0) {
-        this.playJumpAnimation();
-        return;
-      } else {
-        this.playFallAnimation();
-        return;
+        if (this.body.velocity.y < 0) {
+          this.playJumpAnimation();
+          return;
+        } else {
+          this.playFallAnimation();
+          return;
+        }
       }
     }
   }
 
+  private checkPunchZonePosition() {
+    // if (this.punchZone) {
+    //   const offsetX = this.flipX ? -56 : +56;
+    //   this.punchZone.setPosition(this.x + offsetX, this.y - 56);
+    // }
+  }
 
 
+  private createPunchZone() {
+    if (this.punchZone && this.punchZone?.active) {
+      const offsetX = this.flipX ? -56 : +56;
+      this.punchZone.setPosition(this.x + offsetX, this.y - 56);
+    } else {
+      const offsetX = this.flipX ? -56 : +56;
+      this.punchZone = this.scene.add.zone(
+        this.x + offsetX,
+        this.y - 56,
+        16,
+        16
+      );
+      this.scene.physics.add.existing(this.punchZone);
+      this.scene.add.existing(this);
+      // @ts-ignore
+      this.punchZone.body.allowGravity = false;
+    }
+
+  }
 
 
 }
