@@ -97,4 +97,12 @@ export class LevelMap {
     }
   }
 
+  public getWidth() {
+    return this.map.widthInPixels;
+  }
+
+  public getHeight() {
+    return this.map.heightInPixels;
+  }
+
 }

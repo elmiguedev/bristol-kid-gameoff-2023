@@ -45,9 +45,15 @@ export class LevelScene extends Phaser.Scene {
   }
 
   configureCamera() {
-    this.cameras.main.setBounds(0, 0, 6400, 1280);
+    this.cameras.main.setBounds(
+      0,
+      0,
+      this.levelMap.getWidth(),
+      this.levelMap.getHeight()
+    );
     this.cameras.main.startFollow(this.entityManager.getKid(), true);
     this.cameras.main.setBackgroundColor(0x7d99ff);
+    this.cameras.main.setFollowOffset(0, 200);
   }
 
   createHud() {
